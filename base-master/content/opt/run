@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cat <<-END
+
+Starting Supervisor.
+END
+
+icinga2 daemon --validate
+
+ntpd -gq
+service ntp start
+
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
+trap "supervisorctl shutdown && wait" SIGTERM
+wait
