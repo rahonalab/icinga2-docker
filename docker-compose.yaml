@@ -1,6 +1,9 @@
 version: "2"
 services:
-  master:
+  base-master
+     image: rahonalab/icinga2-base-master
+     links:
+     - sql:
      domainname: rahona.be
      hostname: icinga2-master-1
      build: 
@@ -19,3 +22,9 @@ services:
        - /var/icinga2-master/log/apache2:/var/log/apache2
        - /var/icinga2-master/log/icinga2:/var/log/icinga2
        - /var/icinga2-master/log/mysql:/var/log/mysql
+  sql:
+    image: mariadb
+    restart: always
+    environment:
+     - MYSQL_ROOT_PASSWORD: example
+
