@@ -1,10 +1,14 @@
 version: "2"
 services:
   master:
+     domainname: rahona.be
+     hostname: icinga2-master-1
      build: 
       context: ./base-master
      ports:
        - 5665:5665
+     environment:
+       - ICINGA2_USER_FULLNAME=Icinga2 Docker Monitoring Instance
      volumes:
        - /var/icinga2-master/cache:/var/cache/icinga2
        - /var/icinga2-master/certs:/etc/apache2/ssl:ro

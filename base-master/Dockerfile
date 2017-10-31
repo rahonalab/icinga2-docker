@@ -12,7 +12,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get update \
      && apt-get upgrade -y \
      && apt-get install -y --no-install-recommends \
-          curl \
+          ca-certificates \
+	  curl \
           gcc  \
 	  gnupg2 \
           mysql-client \
@@ -53,9 +54,20 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           icinga2 \
           icinga2-ido-mysql \
           icingacli \
+	  monitoring-plugins \
           bc               \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
+ADD content/ /
+
+# Final fixes
+RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
+    && mv /etc/icinga2/ /etc/icinga2.dist \
+    && usermod -aG nagios www-data \
+    && chmod u+s,g+s \
+        /bin/ping \
+        /bin/ping6 \
+        /usr/lib/nagios/plugins/check_icmp
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]

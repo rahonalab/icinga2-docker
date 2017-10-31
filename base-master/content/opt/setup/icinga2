@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! "$(ls -A /etc/icinga2)" ]; then
+if [ ! "$(ls -A /etc/icinga2/conf.d)" ]; then
   echo "=> Copying fresh config-files for /etc/icinga2"
   cp -R /etc/icinga2.dist/* /etc/icinga2/
 fi
