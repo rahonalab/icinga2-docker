@@ -1,6 +1,8 @@
-# icinga2 (rahona built for Arka)
+# icinga2-docker
 
 This repository is an initial fork of [https://github.com/jjethwa/icinga2] (Jordan Jethwa's icinga2 docker image), which is also available as a dockerhub-repository is located at [https://hub.docker.com/r/jordan/icinga2/](https://hub.docker.com/r/jordan/icinga2/).
+
+
 
 ## Image details
 
@@ -44,25 +46,6 @@ example:
 ```
 docker run [...] -v $PWD/icingaweb2-sessions:/var/lib/php5/sessions/ jordan/icinga2
 ```
-
-## Graphite
-
-The graphite writer can be enabled by setting the `ICINGA2_FEATURE_GRAPHITE` variable to `true` or `1` and also supplying values for `ICINGA2_FEATURE_GRAPHITE_HOST` and `ICINGA2_FEATURE_GRAPHITE_PORT`. This container does not have graphite and the carbon daemons installed so `ICINGA2_FEATURE_GRAPHITE_HOST` should not be set to `localhost`.
-
-Example:
-
-```
-docker run -t \
-  --link graphite:graphite \
-  -e ICINGA2_FEATURE_GRAPHITE=true \
-  -e ICINGA2_FEATURE_GRAPHITE_HOST=graphite \
-  -e ICINGA2_FEATURE_GRAPHITE_PORT=2003 \
-  jordan/icinga2:latest
-```
-
-## Icinga Director
-
-The [Icinga Director](https://github.com/Icinga/icingaweb2-module-director) Icinga Web 2 module is installed and enabled by default. You can disable the automatic kickstart when the container starts by setting the `DIRECTOR_KICKSTART` variable to false. To customize the kickstart settings, modify the `/etc/icingaweb2/modules/director/kickstart.ini`.
 
 ## Sending Notification Mails
 

@@ -1,30 +1,30 @@
 version: "2"
 services:
-  base-master
-     image: rahonalab/icinga2-base-master
+  base-master:
+     image: rahonabe/icinga2-base-master
+     env_file: ./secrets.env
      links:
-     - sql:
+        - sql
      domainname: rahona.be
-     hostname: icinga2-master-1
+     hostname: icinga2-master
      build: 
       context: ./base-master
      ports:
        - 5665:5665
-     environment:
-       - ICINGA2_USER_FULLNAME=Icinga2 Docker Monitoring Instance
      volumes:
-       - /var/icinga2-master/cache:/var/cache/icinga2
-       - /var/icinga2-master/certs:/etc/apache2/ssl:ro
-       - /var/icinga2-master/etc/icinga2:/etc/icinga2
-       - /var/icinga2-master/lib/icinga2:/var/lib/icinga2
-       - /var/icinga2-master/lib/mysql:/var/lib/mysql
-       - /var/icinga2-master/lib/php5/sessions:/var/lib/php5/sessions
-       - /var/icinga2-master/log/apache2:/var/log/apache2
-       - /var/icinga2-master/log/icinga2:/var/log/icinga2
-       - /var/icinga2-master/log/mysql:/var/log/mysql
+       - ./icinga2-master/cache:/var/cache/icinga2
+       - ./icinga2-master/certs:/etc/apache2/ssl:ro
+       - ./icinga2-master/etc/icinga2:/etc/icinga2
+       - ./icinga2-master/lib/icinga2:/var/lib/icinga2
+       - ./icinga2-master/lib/php5/sessions:/var/lib/php5/sessions
+       - ./icinga2-master/log/apache2:/var/log/apache2
+       - ./icinga2-master/log/icinga2:/var/log/icinga2
   sql:
     image: mariadb
+    env_file: ./secrets.env
+    domainname: rahona.be
+    hostname: icinga2-sql
     restart: always
-    environment:
-     - MYSQL_ROOT_PASSWORD: example
-
+    volumes:
+      - ./icinga2-sql/lib/mysql:/var/lib/mysql
+      - ./icinga2-sql/log/mysql:/var/log/mysql

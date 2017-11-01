@@ -1,0 +1,623 @@
+[2017-11-01 21:06:11 +0100] information/LivestatusListener: 'livestatus' started.
+[2017-11-01 21:06:11 +0100] information/LivestatusListener: Created UNIX socket in '/run/icinga2/cmd/livestatus'.
+[2017-11-01 21:06:11 +0100] information/ApiListener: Adding new listener on port '5665'
+[2017-11-01 21:06:11 +0100] information/ExternalCommandListener: 'command' started.
+[2017-11-01 21:06:11 +0100] information/CompatLogger: 'compatlog' started.
+[2017-11-01 21:06:11 +0100] information/CheckerComponent: 'checker' started.
+[2017-11-01 21:06:11 +0100] information/DbConnection: 'ido-mysql' started.
+[2017-11-01 21:06:11 +0100] information/NotificationComponent: 'notification' started.
+[2017-11-01 21:06:11 +0100] information/PerfdataWriter: 'perfdata' started.
+[2017-11-01 21:06:11 +0100] information/ConfigItem: Activated all objects.
+[2017-11-01 21:06:11 +0100] information/DbConnection: Resuming IDO connection: ido-mysql
+[2017-11-01 21:06:11 +0100] information/IdoMysqlConnection: 'ido-mysql' resumed.
+[2017-11-01 21:06:11 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:06:11 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:06:11 +0100] information/ConfigItem: Committing config item(s).
+[2017-11-01 21:06:11 +0100] warning/ApplyRule: Apply rule 'satellite-host' (in /etc/icinga2/conf.d/satellite.conf: 29:1-29:41) for type 'Dependency' does not match anywhere!
+[2017-11-01 21:06:11 +0100] warning/ApplyRule: Apply rule 'ssh' (in /etc/icinga2/conf.d/services.conf: 47:1-47:19) for type 'Service' does not match anywhere!
+[2017-11-01 21:06:11 +0100] information/ConfigItem: Instantiated 1 Downtime.
+[2017-11-01 21:06:11 +0100] information/ConfigItem: Triggering Start signal for config items
+[2017-11-01 21:06:11 +0100] information/ConfigItem: Activated all objects.
+[2017-11-01 21:06:21 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.216667/s (13/min 13/5min 13/15min);
+[2017-11-01 21:06:21 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-11-01 21:06:21 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 0.35/s (21/min 21/5min 21/15min);
+[2017-11-01 21:06:21 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:06:21 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:06:31 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:06:31 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:06:41 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:06:41 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:06:51 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:06:51 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:01 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:01 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:11 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:11 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:21 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:21 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:31 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:31 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:41 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:41 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:07:51 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:07:51 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:08:01 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:08:01 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:08:47 +0100] information/LivestatusListener: 'livestatus' started.
+[2017-11-01 21:08:47 +0100] information/LivestatusListener: Created UNIX socket in '/run/icinga2/cmd/livestatus'.
+[2017-11-01 21:08:47 +0100] information/ApiListener: Adding new listener on port '5665'
+[2017-11-01 21:08:47 +0100] information/CompatLogger: 'compatlog' started.
+[2017-11-01 21:08:47 +0100] information/ExternalCommandListener: 'command' started.
+[2017-11-01 21:08:47 +0100] information/CheckerComponent: 'checker' started.
+[2017-11-01 21:08:47 +0100] information/DbConnection: 'ido-mysql' started.
+[2017-11-01 21:08:47 +0100] information/NotificationComponent: 'notification' started.
+[2017-11-01 21:08:47 +0100] information/PerfdataWriter: 'perfdata' started.
+[2017-11-01 21:08:47 +0100] information/ConfigItem: Activated all objects.
+[2017-11-01 21:08:47 +0100] information/DbConnection: Resuming IDO connection: ido-mysql
+[2017-11-01 21:08:47 +0100] information/IdoMysqlConnection: 'ido-mysql' resumed.
+[2017-11-01 21:08:47 +0100] information/ConfigItem: Committing config item(s).
+[2017-11-01 21:08:47 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:08:47 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:08:47 +0100] warning/ApplyRule: Apply rule 'satellite-host' (in /etc/icinga2/conf.d/satellite.conf: 29:1-29:41) for type 'Dependency' does not match anywhere!
+[2017-11-01 21:08:47 +0100] warning/ApplyRule: Apply rule 'ssh' (in /etc/icinga2/conf.d/services.conf: 47:1-47:19) for type 'Service' does not match anywhere!
+[2017-11-01 21:08:47 +0100] information/ConfigItem: Instantiated 1 Downtime.
+[2017-11-01 21:08:47 +0100] information/ConfigItem: Triggering Start signal for config items
+[2017-11-01 21:08:47 +0100] information/ConfigItem: Activated all objects.
+[2017-11-01 21:08:57 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.233333/s (14/min 14/5min 14/15min);
+[2017-11-01 21:08:57 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-11-01 21:08:57 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 0.35/s (21/min 21/5min 21/15min);
+[2017-11-01 21:08:57 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:08:57 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:09:07 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 3, rate: 0.85/s (51/min 51/5min 51/15min);
+[2017-11-01 21:09:07 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:09:07 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:09:17 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:09:17 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:09:27 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:09:27 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:09:33 +0100] information/Application: Received request to shut down.
+[2017-11-01 21:09:33 +0100] information/Application: Shutting down...
+[2017-11-01 21:09:33 +0100] information/ApiListener: 'api' stopped.
+[2017-11-01 21:09:33 +0100] information/CheckerComponent: 'checker' stopped.
+[2017-11-01 21:09:33 +0100] information/CompatLogger: 'compatlog' stopped.
+[2017-11-01 21:09:33 +0100] information/ExternalCommandListener: 'command' stopped.
+[2017-11-01 21:16:49 +0100] information/LivestatusListener: 'livestatus' started.
+[2017-11-01 21:16:49 +0100] information/LivestatusListener: Created UNIX socket in '/run/icinga2/cmd/livestatus'.
+[2017-11-01 21:16:49 +0100] information/ApiListener: Adding new listener on port '5665'
+[2017-11-01 21:16:49 +0100] information/CompatLogger: 'compatlog' started.
+[2017-11-01 21:16:49 +0100] information/ExternalCommandListener: 'command' started.
+[2017-11-01 21:16:49 +0100] information/CheckerComponent: 'checker' started.
+[2017-11-01 21:16:49 +0100] information/DbConnection: 'ido-mysql' started.
+[2017-11-01 21:16:49 +0100] information/NotificationComponent: 'notification' started.
+[2017-11-01 21:16:49 +0100] information/PerfdataWriter: 'perfdata' started.
+[2017-11-01 21:16:49 +0100] information/ConfigItem: Activated all objects.
+[2017-11-01 21:16:49 +0100] information/DbConnection: Resuming IDO connection: ido-mysql
+[2017-11-01 21:16:49 +0100] information/IdoMysqlConnection: 'ido-mysql' resumed.
+[2017-11-01 21:16:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:16:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:16:59 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.233333/s (14/min 14/5min 14/15min);
+[2017-11-01 21:16:59 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-11-01 21:16:59 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 0.316667/s (19/min 19/5min 19/15min);
+[2017-11-01 21:16:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:16:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:17:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:17:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:18:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:18:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:15 +0100] information/Checkable: Checking for configured notifications for object 'icinga2-master.rahona.be!http'
+[2017-11-01 21:19:15 +0100] information/Notification: Sending 'Problem' notification 'icinga2-master.rahona.be!http!mail-icingaadmin' for user 'icingaadmin'
+[2017-11-01 21:19:15 +0100] information/Notification: Completed sending 'Problem' notification 'icinga2-master.rahona.be!http!mail-icingaadmin' for checkable 'icinga2-master.rahona.be!http' and user 'icingaadmin'.
+[2017-11-01 21:19:15 +0100] warning/PluginNotificationTask: Notification command for object 'icinga2-master.rahona.be!http' (PID: 317, arguments: '/etc/icinga2/scripts/mail-service-notification.sh' '-4' '127.0.0.1' '-6' '::1' '-b' '' '-c' '' '-d' '2017-11-01 21:19:15 +0100' '-e' 'http' '-l' 'icinga2-master.rahona.be' '-n' 'icinga2-master.rahona.be' '-o' 'connect to address 127.0.0.1 and port 80: Connection refused
+HTTP CRITICAL - Unable to open TCP socket' '-r' 'root@localhost' '-s' 'CRITICAL' '-t' 'PROBLEM' '-u' 'http' '-v' 'false') terminated with exit code 1, output: mail not found in $PATH. Consider installing it.
+
+[2017-11-01 21:19:15 +0100] information/Checkable: Checking for configured notifications for object 'icinga2-master.rahona.be!ping6'
+[2017-11-01 21:19:15 +0100] information/Notification: Sending 'Problem' notification 'icinga2-master.rahona.be!ping6!mail-icingaadmin' for user 'icingaadmin'
+[2017-11-01 21:19:15 +0100] information/Notification: Completed sending 'Problem' notification 'icinga2-master.rahona.be!ping6!mail-icingaadmin' for checkable 'icinga2-master.rahona.be!ping6' and user 'icingaadmin'.
+[2017-11-01 21:19:15 +0100] warning/PluginNotificationTask: Notification command for object 'icinga2-master.rahona.be!ping6' (PID: 323, arguments: '/etc/icinga2/scripts/mail-service-notification.sh' '-4' '127.0.0.1' '-6' '::1' '-b' '' '-c' '' '-d' '2017-11-01 21:19:15 +0100' '-e' 'ping6' '-l' 'icinga2-master.rahona.be' '-n' 'icinga2-master.rahona.be' '-o' '/bin/ping6 -n -U -w 10 -c 5 ::1
+CRITICAL - Could not interpret output from ping command' '-r' 'root@localhost' '-s' 'UNKNOWN' '-t' 'PROBLEM' '-u' 'ping6' '-v' 'false') terminated with exit code 1, output: mail not found in $PATH. Consider installing it.
+
+[2017-11-01 21:19:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:19:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:19:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:20:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:20:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:39 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 3.2/s (192/min 931/5min 931/15min);
+[2017-11-01 21:21:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:21:49 +0100] information/ConfigObject: Dumping program state to file '/var/lib/icinga2/icinga2.state'
+[2017-11-01 21:21:59 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.616667/s (37/min 201/5min 215/15min);
+[2017-11-01 21:21:59 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-11-01 21:21:59 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 3.1/s (186/min 976/5min 995/15min);
+[2017-11-01 21:21:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:21:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:09 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 3.1/s (186/min 978/5min 1024/15min);
+[2017-11-01 21:22:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:39 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.1/s (186/min 990/5min 1117/15min);
+[2017-11-01 21:22:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:49 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 3.05/s (183/min 955/5min 1158/15min);
+[2017-11-01 21:22:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:22:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:22:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:29 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 2.96667/s (178/min 944/5min 1271/15min);
+[2017-11-01 21:23:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:23:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:23:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:24:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:24:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:19 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.03333/s (182/min 924/5min 1616/15min);
+[2017-11-01 21:25:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:29 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.05/s (183/min 927/5min 1646/15min);
+[2017-11-01 21:25:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:25:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:25:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:29 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 929/5min 1834/15min);
+[2017-11-01 21:26:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:49 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 921/5min 1896/15min);
+[2017-11-01 21:26:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:49 +0100] information/ConfigObject: Dumping program state to file '/var/lib/icinga2/icinga2.state'
+[2017-11-01 21:26:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:26:59 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-11-01 21:26:59 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.633333/s (38/min 190/5min 402/15min);
+[2017-11-01 21:26:59 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 2.98333/s (179/min 919/5min 1923/15min);
+[2017-11-01 21:26:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:26:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:09 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 921/5min 1954/15min);
+[2017-11-01 21:27:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:27:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:27:59 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 2.98333/s (179/min 921/5min 2109/15min);
+[2017-11-01 21:27:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:09 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 2.95/s (177/min 919/5min 2138/15min);
+[2017-11-01 21:28:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:19 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 3.08333/s (185/min 927/5min 2177/15min);
+[2017-11-01 21:28:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:39 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 925/5min 2237/15min);
+[2017-11-01 21:28:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:49 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 921/5min 2268/15min);
+[2017-11-01 21:28:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:28:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:28:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:09 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 1, rate: 2.98333/s (179/min 923/5min 2324/15min);
+[2017-11-01 21:29:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:29:59 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 2.98333/s (179/min 923/5min 2481/15min);
+[2017-11-01 21:29:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:29:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:19 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:19 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:29 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:29 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:39 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:39 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:39 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate:  3/s (180/min 924/5min 2610/15min);
+[2017-11-01 21:30:49 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:49 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:30:49 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate:  3/s (180/min 924/5min 2641/15min);
+[2017-11-01 21:30:59 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:30:59 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!
+[2017-11-01 21:31:09 +0100] critical/IdoMysqlConnection: Connection to database 'icinga2idomysql' with user 'icinga2-ido-mysq' on 'localhost:3306' failed: "Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)"
+Context:
+	(0) Reconnecting to MySQL IDO database 'ido-mysql'
+
+[2017-11-01 21:31:09 +0100] critical/IdoMysqlConnection: Exception during database operation: Verify that your database is operational!

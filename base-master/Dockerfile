@@ -17,7 +17,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           gcc  \
 	  gnupg2 \
           mysql-client \
-          mysql-server \
           net-tools \
           ntp       \
 	  php5-cli \
