@@ -12,19 +12,36 @@ services:
      ports:
        - 5665:5665
      volumes:
-       - ./icinga2-master/cache:/var/cache/icinga2
-       - ./icinga2-master/certs:/etc/apache2/ssl:ro
-       - ./icinga2-master/etc/icinga2:/etc/icinga2
-       - ./icinga2-master/lib/icinga2:/var/lib/icinga2
-       - ./icinga2-master/lib/php5/sessions:/var/lib/php5/sessions
-       - ./icinga2-master/log/apache2:/var/log/apache2
-       - ./icinga2-master/log/icinga2:/var/log/icinga2
+       - ./icinga2-container/cache/icinga2:/var/cache/icinga2
+       - ./icinga2-container/etc/icinga2:/etc/icinga2
+       - ./icinga2-container/lib/icinga2:/var/lib/icinga2
+       - ./icinga2-container/log/icinga2:/var/log/icinga2
+       - ./icinga2-container/run/icinga2:/var/run/icinga2
+       - ./icinga2-container/spool/icinga2:/var/spool/icinga2
   sql:
     image: mariadb
     env_file: ./secrets.env
     domainname: rahona.be
     hostname: icinga2-sql
-    restart: always
     volumes:
-      - ./icinga2-sql/lib/mysql:/var/lib/mysql
-      - ./icinga2-sql/log/mysql:/var/log/mysql
+      - ./icinga2-container/lib/mariadb:/var/lib/mariadb
+    restart: always
+  web:
+   image: rahonabe/icinga2-web
+   env_file: ./secrets.env
+   links:
+     - sql
+     - base-master
+   domainname: rahona.be
+   hostname: icinga2-web
+   build: 
+    context: ./web
+   ports:
+     - 80:80
+   volumes:
+     - ./icinga2-container/etc/icingaweb2:/etc/icingaweb2
+     - ./icinga2-container/lib/php5/sessions:/var/lib/php5/sessions
+     - ./icinga2-container/log/apache2:/var/log/apache2
+     - ./icinga2-container/certs:/etc/apache2/ssl:ro
+   volumes_from:
+     - base-master

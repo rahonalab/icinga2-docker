@@ -1,0 +1,53 @@
+[2017-12-09 19:48:30 +0100] information/LivestatusListener: 'livestatus' started.
+[2017-12-09 19:48:30 +0100] information/ApiListener: Adding new listener on port '5665'
+[2017-12-09 19:48:30 +0100] information/LivestatusListener: Created UNIX socket in '/run/icinga2/cmd/livestatus'.
+[2017-12-09 19:48:30 +0100] information/CompatLogger: 'compatlog' started.
+[2017-12-09 19:48:30 +0100] information/ExternalCommandListener: 'command' started.
+[2017-12-09 19:48:30 +0100] information/CheckerComponent: 'checker' started.
+[2017-12-09 19:48:30 +0100] information/DbConnection: 'ido-mysql' started.
+[2017-12-09 19:48:30 +0100] information/NotificationComponent: 'notification' started.
+[2017-12-09 19:48:30 +0100] information/PerfdataWriter: 'perfdata' started.
+[2017-12-09 19:48:30 +0100] information/ConfigItem: Activated all objects.
+[2017-12-09 19:48:30 +0100] information/DbConnection: Resuming IDO connection: ido-mysql
+[2017-12-09 19:48:30 +0100] information/IdoMysqlConnection: 'ido-mysql' resumed.
+[2017-12-09 19:48:30 +0100] information/IdoMysqlConnection: MySQL IDO instance id: 1 (schema version: '1.14.3')
+[2017-12-09 19:48:30 +0100] information/ConfigItem: Committing config item(s).
+[2017-12-09 19:48:30 +0100] warning/ApplyRule: Apply rule 'ssh' (in /etc/icinga2/conf.d/services.conf: 47:1-47:19) for type 'Service' does not match anywhere!
+[2017-12-09 19:48:30 +0100] information/ConfigItem: Instantiated 1 Downtime.
+[2017-12-09 19:48:30 +0100] information/ConfigItem: Triggering Start signal for config items
+[2017-12-09 19:48:30 +0100] information/ConfigItem: Activated all objects.
+[2017-12-09 19:48:30 +0100] information/IdoMysqlConnection: Finished reconnecting to MySQL IDO database in 0.0652201 second(s).
+[2017-12-09 19:48:39 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-12-09 19:48:39 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.216667/s (13/min 13/5min 13/15min);
+[2017-12-09 19:48:39 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 0.416667/s (25/min 25/5min 25/15min);
+[2017-12-09 19:49:19 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 2.21667/s (133/min 133/5min 133/15min);
+[2017-12-09 19:49:29 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.33333/s (200/min 200/5min 200/15min);
+[2017-12-09 19:50:09 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.6/s (216/min 328/5min 328/15min);
+[2017-12-09 19:50:53 +0100] information/Checkable: Checking for configured notifications for object 'icinga2-master.rahona.be!ping6'
+[2017-12-09 19:50:53 +0100] information/Notification: Sending 'Problem' notification 'icinga2-master.rahona.be!ping6!mail-icingaadmin' for user 'icingaadmin'
+[2017-12-09 19:50:53 +0100] information/Notification: Completed sending 'Problem' notification 'icinga2-master.rahona.be!ping6!mail-icingaadmin' for checkable 'icinga2-master.rahona.be!ping6' and user 'icingaadmin'.
+[2017-12-09 19:50:53 +0100] warning/PluginNotificationTask: Notification command for object 'icinga2-master.rahona.be!ping6' (PID: 332, arguments: '/etc/icinga2/scripts/mail-service-notification.sh' '-4' '127.0.0.1' '-6' '::1' '-b' '' '-c' '' '-d' '2017-12-09 19:50:53 +0100' '-e' 'ping6' '-l' 'icinga2-master.rahona.be' '-n' 'icinga2-master.rahona.be' '-o' '/bin/ping6 -n -U -w 10 -c 5 ::1
+CRITICAL - Could not interpret output from ping command' '-r' 'root@localhost' '-s' 'UNKNOWN' '-t' 'PROBLEM' '-u' 'ping6' '-v' 'false') terminated with exit code 1, output: mail not found in $PATH. Consider installing it.
+
+[2017-12-09 19:50:54 +0100] information/Checkable: Checking for configured notifications for object 'icinga2-master.rahona.be!disk'
+[2017-12-09 19:50:54 +0100] information/Notification: Sending 'Problem' notification 'icinga2-master.rahona.be!disk!mail-icingaadmin' for user 'icingaadmin'
+[2017-12-09 19:50:54 +0100] information/Notification: Completed sending 'Problem' notification 'icinga2-master.rahona.be!disk!mail-icingaadmin' for checkable 'icinga2-master.rahona.be!disk' and user 'icingaadmin'.
+[2017-12-09 19:50:54 +0100] warning/PluginNotificationTask: Notification command for object 'icinga2-master.rahona.be!disk' (PID: 337, arguments: '/etc/icinga2/scripts/mail-service-notification.sh' '-4' '127.0.0.1' '-6' '::1' '-b' '' '-c' '' '-d' '2017-12-09 19:50:54 +0100' '-e' 'disk' '-l' 'icinga2-master.rahona.be' '-n' 'icinga2-master.rahona.be' '-o' 'DISK WARNING - free space: / 48353 MB (79% inode=90%); /etc/icinga2 48284 MB (20% inode=99%); /etc/hostname 48353 MB (79% inode=90%); /etc/hosts 48353 MB (79% inode=90%); /etc/resolv.conf 48353 MB (79% inode=90%); /var/lib/icinga2 48284 MB (20% inode=99%); /var/log/icinga2 48284 MB (20% inode=99%); /var/cache/icinga2 48284 MB (20% inode=99%); /var/spool/icinga2 48284 MB (20% inode=99%); /run/icinga2 48284 MB (20% inode=99%);' '-r' 'root@localhost' '-s' 'WARNING' '-t' 'PROBLEM' '-u' 'disk' '-v' 'false') terminated with exit code 1, output: mail not found in $PATH. Consider installing it.
+
+[2017-12-09 19:50:56 +0100] information/Checkable: Checking for configured notifications for object 'icinga2-master.rahona.be!http'
+[2017-12-09 19:50:56 +0100] information/Notification: Sending 'Problem' notification 'icinga2-master.rahona.be!http!mail-icingaadmin' for user 'icingaadmin'
+[2017-12-09 19:50:56 +0100] information/Notification: Completed sending 'Problem' notification 'icinga2-master.rahona.be!http!mail-icingaadmin' for checkable 'icinga2-master.rahona.be!http' and user 'icingaadmin'.
+[2017-12-09 19:50:56 +0100] warning/PluginNotificationTask: Notification command for object 'icinga2-master.rahona.be!http' (PID: 344, arguments: '/etc/icinga2/scripts/mail-service-notification.sh' '-4' '127.0.0.1' '-6' '::1' '-b' '' '-c' '' '-d' '2017-12-09 19:50:56 +0100' '-e' 'http' '-l' 'icinga2-master.rahona.be' '-n' 'icinga2-master.rahona.be' '-o' 'connect to address 127.0.0.1 and port 80: Connection refused
+HTTP CRITICAL - Unable to open TCP socket' '-r' 'root@localhost' '-s' 'CRITICAL' '-t' 'PROBLEM' '-u' 'http' '-v' 'false') terminated with exit code 1, output: mail not found in $PATH. Consider installing it.
+
+[2017-12-09 19:53:30 +0100] information/ConfigObject: Dumping program state to file '/var/lib/icinga2/icinga2.state'
+[2017-12-09 19:53:39 +0100] information/WorkQueue: #5 (ApiListener, RelayQueue) items: 0, rate: 0.6/s (36/min 201/5min 214/15min);
+[2017-12-09 19:53:39 +0100] information/WorkQueue: #6 (ApiListener, SyncQueue) items: 0, rate:  0/s (0/min 0/5min 0/15min);
+[2017-12-09 19:53:40 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 0, rate: 3.1/s (186/min 279828/5min 279859/15min);
+[2017-12-09 19:54:10 +0100] information/WorkQueue: #7 (IdoMysqlConnection, ido-mysql) items: 6, rate: 3.1/s (186/min 279834/5min 279946/15min);
+[2017-12-09 19:56:25 +0100] information/Application: Received request to shut down.
+[2017-12-09 19:56:26 +0100] information/Application: Shutting down...
+[2017-12-09 19:56:26 +0100] information/ApiListener: 'api' stopped.
+[2017-12-09 19:56:26 +0100] information/CheckerComponent: 'checker' stopped.
+[2017-12-09 19:56:26 +0100] information/CompatLogger: 'compatlog' stopped.
+[2017-12-09 19:56:26 +0100] information/ExternalCommandListener: 'command' stopped.

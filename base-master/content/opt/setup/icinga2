@@ -1,12 +1,10 @@
-#Original file from jjethwa/icinga2
-#Modified to connect to the MariaDb container
-
 #!/bin/bash
+#Original file from jjethwa/icinga2
+#Modified to connect to the MariaDB container
 
-if [ ! "$(ls -A /etc/icinga2/conf.d)" ]; then
-  echo "=> Copying fresh config-files for /etc/icinga2"
-  cp -R /etc/icinga2.dist/* /etc/icinga2/
-fi
+echo "=> Ok, new installation. I will run some scripts"
+echo "=> Copying fresh config-files for /etc/icinga2"
+cp -R /etc/icinga2.dist/* /etc/icinga2/
 
 # chown directories and files that might be coming from volumes
 mkdir -p /var/log/icinga2/compat/archives
@@ -15,6 +13,10 @@ chown -R nagios:adm /var/log/icinga2
 mkdir -p /var/lib/icinga2/api/zones
 mkdir -p /var/lib/icinga2/api/log
 mkdir -p /var/lib/icinga2/api/repository
+mkdir -p /var/spool/icinga2/perfdata
+mkdir -p /var/spool/icinga2/tmp
+
+
 chown -R nagios:nagios /var/lib/icinga2
 chown -R nagios:nagios /var/spool/icinga2
 chown -R nagios:nagios /var/cache/icinga2
@@ -31,7 +33,23 @@ fi
 
 chfn -f "${ICINGA2_USER_FULLNAME}" nagios
 
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h sql icinga < /usr/share/icinga2-ido-mysql/schema/mysql.sql >> /var/log/icinga2/mysql-schema.log 2>&1
+#Connect to MariaDB container
+mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
+
+#Wait until MariaDB container is ready
+while ! $mysql -e status &> /dev/null; do
+    sleep 1s
+    echo -n "."
+  done
+
+#Create DB and users
+$mysql <<-END
+  CREATE DATABASE IF NOT EXISTS icinga2idomysql;
+  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga2idomysql.* TO 'icinga2idomysql'@'%' IDENTIFIED BY '${ICINGA_PASSWORD}';
+END
+
+#Import schemas
+$mysql icinga2idomysql < /usr/share/icinga2-ido-mysql/schema/mysql.sql >> /var/log/icinga2/mysql-schema.log 2>&1
 
 # IDO MySQL
 cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
@@ -43,16 +61,12 @@ cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
 library "db_ido_mysql"
 
 object IdoMysqlConnection "ido-mysql" {
-  user = "icinga2-ido-mysq",
-  password = "${MYSQL_PASSWORD}",
+  user = "icinga2idomysql",
+  password = "${ICINGA_PASSWORD}",
   host = "sql",
   database = "icinga2idomysql"
 }
 END
 
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h sql <<-END
-  CREATE DATABASE IF NOT EXISTS icinga2idomysql;
-  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga2idomysql.* TO 'icinga2-ido-mysq'@'localhost' IDENTIFIED BY '${IDO_PASSWORD}';
-END
 
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h sql icinga2idomysql < /usr/share/dbconfig-common/data/icinga2-ido-mysql/install/mysql >> /var/log/icinga2/ido-mysql-schema.log 2>&1
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+service npcd start
+
+mkdir -p /var/cache/rrdcached
+chown nagios: /var/cache/rrdcached
+
+service rrdcached start

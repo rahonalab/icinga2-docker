@@ -1,13 +1,14 @@
 #Rahona be Labs
-# Dockerfile for an icinga2 master system: no icingaweb2, no notification
-
+# Dockerfile for an icingaweb2 system
 #Contains code from
 # https://github.com/jjethwa/icinga2
 
+#Use debian:jessie
 FROM debian:jessie
 
 MAINTAINER Luigi - Rahona Labs
 
+#First apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get update \
      && apt-get upgrade -y \
@@ -19,6 +20,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           mysql-client \
           net-tools \
           ntp       \
+	  php5-cli \
+	  php5-gd \
+          php5-curl \
+          php5-ldap \
+	  php5-mysql \
           procps \
           python \
           python-dev \
@@ -36,8 +42,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 RUN echo Europe/Rome >/etc/timezone && \
 dpkg-reconfigure -f noninteractive tzdata
 
-RUN echo "deb http://http.debian.net/debian/ jessie main contrib non-free" > /etc/apt/sources.list
-
+#Second apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
      && wget --quiet -O - https://packages.icinga.org/icinga.key \
      | apt-key add - \
@@ -45,22 +50,32 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backport.list \
      && apt-get update \
      && apt-get install -y --no-install-recommends \
-          icinga2 \
-          icinga2-ido-mysql \
-	  monitoring-plugins \
+          icingaweb2 \
+          icingacli \
+          	  rrdcached \
           bc               \
+          && apt-get -y -t jessie-backports install pnp4nagios \
+          pnp4nagios-web \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
 ADD content/ /
 
-# Final fixes
-RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
-    && mv /etc/icinga2/ /etc/icinga2.dist \
-    && usermod -aG nagios www-data \
-    && chmod u+s,g+s \
-        /bin/ping \
-        /bin/ping6 \
-        /usr/lib/nagios/plugins/check_icmp
+# Set git to the master repository
+ARG GITREF_ICINGAWEB2=master
+ARG GITREF_PNP=master
+
+# Temporary hack to get icingaweb2 modules via git. For the time being, we only install generic modules and pnp module
+RUN mkdir -p /usr/local/share/icingaweb2/modules/ \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2/archive/${GITREF_ICINGAWEB2}.tar.gz" \
+    | tar xz --strip-components=2 --directory=/usr/local/share/icingaweb2/modules -f - icingaweb2-${GITREF_ICINGAWEB2}/modules/monitoring icingaweb2-${GITREF_ICINGAWEB2}/modules/doc \
+    && mkdir -p /usr/local/share/icingaweb2/modules/pnp \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/${GITREF_PNP}.tar.gz" \
+    | tar xz --strip-components=1 --directory=/usr/local/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-${GITREF_PNP}/ \
+    && mv /etc/icingaweb2/ /etc/icingaweb2.dist \
+    && mkdir /etc/icingaweb2 \
+    && usermod -aG icingaweb2 www-data \
+    && usermod -aG nagios www-data
+ 
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]

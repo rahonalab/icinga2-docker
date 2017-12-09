@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ ! "$(ls -A /etc/icingaweb2/config.ini)" ]; then
+export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
+	
+/opt/setup/icingaweb2
+/opt/setup/pnp4nagios
+
+
+cat <<-END
+===================================================================
+Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICINGAWEB2_ADMIN_PASS}
+Icingweb2 Maria DB password was set in the secret file to ${ICINGAWEB2_PASSWORD}
+===================================================================
+
+END
+fi
+
+ntpd -gq
+service ntp start
+
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
+trap "supervisorctl shutdown && wait" SIGTERM
+wait

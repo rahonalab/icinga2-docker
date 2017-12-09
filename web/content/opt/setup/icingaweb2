@@ -1,0 +1,82 @@
+#!/bin/bash
+
+
+echo "=> Copying fresh config-files for /etc/icingaweb2"
+  cp -R /etc/icingaweb2.dist/* /etc/icingaweb2/
+
+# chown directories and files that might be coming from volumes
+chmod 2770 /etc/icingaweb2
+chown -R www-data:icingaweb2 /etc/icingaweb2
+
+mkdir -p /var/log/icingaweb2
+chown -R www-data:adm /var/log/icingaweb2
+
+mkdir -p /var/lib/php5/sessions
+chown -R www-data:www-data /var/lib/php5/sessions
+
+chown -R nagios:nagios /var/spool/icinga2
+
+#connect as root
+mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
+
+#Wait until MariaDB container is ready
+while ! $mysql -e status &> /dev/null; do
+    sleep 1s
+    echo -n "."
+  done
+
+
+# grant access to DBs
+$mysql <<-END
+  CREATE DATABASE IF NOT EXISTS icingaweb2;
+  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icingaweb2.* TO 'icingaweb2'@'%' IDENTIFIED BY '${ICINGAWEB2_PASSWORD}';
+END
+
+$mysql icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql >> /var/log/icingaweb2/icingaweb2-schema.log 2>&1
+
+#Setting icingaweb2 ini
+#Resources
+cat >> /etc/icingaweb2/resources.ini <<-END
+
+[icingaweb_db]
+type = "db"
+db = "mysql"
+host = "sql"
+port = "3306"
+dbname = "icingaweb2"
+username = "icingaweb2"
+password = "${ICINGAWEB2_PASSWORD}"
+prefix = "icingaweb_"
+charset = "utf8"
+persistent = "0"
+
+[icinga_ido]
+type = "db"
+db = "mysql"
+host = "sql"
+port = "3306"
+dbname = "icinga2idomysql"
+username = "icinga2idomysql"
+password = "${ICINGA_PASSWORD}"
+charset = "utf8"
+persistent = "0"
+END
+
+#Icingaweb2 user and password
+cat >> /etc/icingaweb2/roles.ini <<-END
+[Administrators]
+users = ${ICINGAWEB2_ADMIN_USER}
+permissions = "*"
+groups = "Administrators"
+END
+
+$mysql <<-END
+  USE icingaweb2;
+  INSERT IGNORE INTO icingaweb_user (name, active, password_hash) VALUES ('${ICINGAWEB2_ADMIN_USER}', 1, '${ICINGAWEB2_ADMIN_PASS_HASH}');
+END
+
+# enable modules
+icingacli module enable monitoring
+icingacli module enable doc
+icingacli module enable pnp
+

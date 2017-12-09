@@ -1,0 +1,5 @@
+[Sat Dec 09 19:48:29.143884 2017] [mpm_prefork:notice] [pid 95] AH00163: Apache/2.4.10 (Debian) configured -- resuming normal operations
+[Sat Dec 09 19:48:29.144436 2017] [core:notice] [pid 95] AH00094: Command line: '/usr/sbin/apache2'
+[Sat Dec 09 19:49:58.572746 2017] [:error] [pid 101] [client 172.18.0.1:35050] PHP Fatal error:  Class 'Icinga\\Chart\\Donut' not found in /usr/local/share/icingaweb2/modules/monitoring/application/controllers/TacticalController.php on line 56, referer: http://localhost/icingaweb2/monitoring/list/contactgroups
+[Sat Dec 09 19:50:48.905368 2017] [:error] [pid 205] [client 172.18.0.1:35112] PHP Fatal error:  Class 'Icinga\\Chart\\Donut' not found in /usr/local/share/icingaweb2/modules/monitoring/application/controllers/TacticalController.php on line 56, referer: http://localhost/icingaweb2/monitoring/list/hosts
+[Sat Dec 09 19:56:20.879366 2017] [mpm_prefork:notice] [pid 95] AH00169: caught SIGTERM, shutting down

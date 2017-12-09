@@ -1,0 +1,31 @@
+information/cli: Icinga application loader (version: r2.8.0-1)
+information/cli: Loading configuration file(s).
+information/ConfigItem: Committing config item(s).
+information/ApiListener: My API identity: icinga2-master.rahona.be
+warning/ApplyRule: Apply rule 'ssh' (in /etc/icinga2/conf.d/services.conf: 47:1-47:19) for type 'Service' does not match anywhere!
+information/ConfigItem: Instantiated 1 ApiListener.
+information/ConfigItem: Instantiated 3 Zones.
+information/ConfigItem: Instantiated 1 Endpoint.
+information/ConfigItem: Instantiated 1 ApiUser.
+information/ConfigItem: Instantiated 1 FileLogger.
+information/ConfigItem: Instantiated 1 LivestatusListener.
+information/ConfigItem: Instantiated 12 Notifications.
+information/ConfigItem: Instantiated 2 NotificationCommands.
+information/ConfigItem: Instantiated 209 CheckCommands.
+information/ConfigItem: Instantiated 2 HostGroups.
+information/ConfigItem: Instantiated 1 IcingaApplication.
+information/ConfigItem: Instantiated 1 Host.
+information/ConfigItem: Instantiated 1 UserGroup.
+information/ConfigItem: Instantiated 1 User.
+information/ConfigItem: Instantiated 3 TimePeriods.
+information/ConfigItem: Instantiated 11 Services.
+information/ConfigItem: Instantiated 3 ServiceGroups.
+information/ConfigItem: Instantiated 1 ScheduledDowntime.
+information/ConfigItem: Instantiated 1 CompatLogger.
+information/ConfigItem: Instantiated 1 ExternalCommandListener.
+information/ConfigItem: Instantiated 1 CheckerComponent.
+information/ConfigItem: Instantiated 1 IdoMysqlConnection.
+information/ConfigItem: Instantiated 1 NotificationComponent.
+information/ConfigItem: Instantiated 1 PerfdataWriter.
+information/ScriptGlobal: Dumping variables to file '/var/cache/icinga2/icinga2.vars'
+information/cli: Finished validating the configuration file(s).
