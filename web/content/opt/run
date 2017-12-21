@@ -4,8 +4,6 @@ if [ ! "$(ls -A /etc/icingaweb2/config.ini)" ]; then
 export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
 	
 /opt/setup/icingaweb2
-/opt/setup/pnp4nagios
-
 
 cat <<-END
 ===================================================================
@@ -14,6 +12,17 @@ Icingweb2 Maria DB password was set in the secret file to ${ICINGAWEB2_PASSWORD}
 ===================================================================
 
 END
+fi
+
+#Remove staled pids
+if [ -f "/var/run/rrdcached.pid" ]; then
+	rm /var/run/rrdcached.pid
+fi
+
+#Check whether rrdcached cache exist... (sorry the wordplay)
+if [ ! -d "/var/cache/rrdcached" ]; then
+	mkdir -p /var/cache/rrdcached
+	chown nagios: /var/cache/rrdcached
 fi
 
 ntpd -gq

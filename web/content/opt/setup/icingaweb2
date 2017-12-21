@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 echo "=> Copying fresh config-files for /etc/icingaweb2"
   cp -R /etc/icingaweb2.dist/* /etc/icingaweb2/
 
@@ -13,8 +11,6 @@ chown -R www-data:adm /var/log/icingaweb2
 
 mkdir -p /var/lib/php5/sessions
 chown -R www-data:www-data /var/lib/php5/sessions
-
-chown -R nagios:nagios /var/spool/icinga2
 
 #connect as root
 mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"

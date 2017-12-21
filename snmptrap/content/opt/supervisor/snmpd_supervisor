@@ -1,0 +1,10 @@
+#!/bin/bash
+
+service snmpd start
+snmptrapd -Os -Lf /var/log/snmptrapd.log -p /var/run/snmptrapd.pid -c /etc/snmp/snmptrapd.conf -m all
+service snmptt start
+
+# Allow any signal which would kill a process to stop server
+trap "service snmpd stop" HUP INT QUIT ABRT ALRM TERM TSTP
+
+while pgrep -u snmptt snmptt > /dev/null; do sleep 5; done

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "Checking for new mibs in /mibs"
+if [ ! -z "`find /mibs -type f`" ]; then
+mv /mibs/snmptt.conf /etc/snmp/
+mv /mibs/* /var/lib/snmp/mibs/
+fi
+
+#Remove staled pids
+if [ -f "/var/run/snmptt.pid" ]; then
+	rm /var/run/snmptt.pid
+fi
+
+echo "Starting Supervisor."
+
+ntpd -gq
+service ntp start
+
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
+trap "supervisorctl shutdown && wait" SIGTERM
+wait

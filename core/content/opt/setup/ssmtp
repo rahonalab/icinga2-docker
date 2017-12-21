@@ -1,0 +1,16 @@
+#!/bin/bash
+#ssmtp configuration // contains code from https://github.com/zalari/docker-wordpress-apache
+
+#overwrite the ssmtp-conf
+
+rm -f /etc/ssmtp/ssmtp.conf
+echo root=${SMTP_ROOT} >> /etc/ssmtp/ssmtp.conf
+echo mailhub=${SMTP_MAILHOST}:${SMTP_PORT} >> /etc/ssmtp/ssmtp.conf
+echo AuthUser=${SMTP_USER} >> /etc/ssmtp/ssmtp.conf
+echo AuthPass=${SMTP_PASS} >> /etc/ssmtp/ssmtp.conf
+echo UseSTARTTLS=${SMTP_USE_STARTTLS} >> /etc/ssmtp/ssmtp.conf
+echo FromLineOverride=${SMTP_FROM_OVERRIDE} >> /etc/ssmtp/ssmtp.conf
+
+echo ${SMTP_REVALIASES} > /etc/ssmtp/revaliases
+
+echo "Ssmtp succesfully started with ${SMTP_MAILHOST}:${SMTP_PORT}"

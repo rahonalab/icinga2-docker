@@ -4,7 +4,7 @@
 # https://github.com/jjethwa/icinga2
 
 #Use debian:jessie
-FROM debian:jessie
+FROM debian:jessie-slim
 
 MAINTAINER Luigi - Rahona Labs
 
@@ -54,7 +54,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           icingacli \
           	  rrdcached \
           bc               \
-          && apt-get -y -t jessie-backports install pnp4nagios \
+     icingaweb2-module-doc \
+     icingaweb2-module-monitoring \
+          && apt-get -y -t jessie-backports install rrdcached \
+	pnp4nagios \
           pnp4nagios-web \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
@@ -62,14 +65,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ADD content/ /
 
 # Set git to the master repository
-ARG GITREF_ICINGAWEB2=master
 ARG GITREF_PNP=master
 
-# Temporary hack to get icingaweb2 modules via git. For the time being, we only install generic modules and pnp module
-RUN mkdir -p /usr/local/share/icingaweb2/modules/ \
-    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2/archive/${GITREF_ICINGAWEB2}.tar.gz" \
-    | tar xz --strip-components=2 --directory=/usr/local/share/icingaweb2/modules -f - icingaweb2-${GITREF_ICINGAWEB2}/modules/monitoring icingaweb2-${GITREF_ICINGAWEB2}/modules/doc \
-    && mkdir -p /usr/local/share/icingaweb2/modules/pnp \
+#Get PNP modules
+RUN mkdir -p /usr/local/share/icingaweb2/modules/pnp \
     && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/${GITREF_PNP}.tar.gz" \
     | tar xz --strip-components=1 --directory=/usr/local/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-${GITREF_PNP}/ \
     && mv /etc/icingaweb2/ /etc/icingaweb2.dist \
