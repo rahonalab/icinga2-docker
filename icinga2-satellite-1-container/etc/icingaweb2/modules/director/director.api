@@ -1,5 +1,0 @@
-
-object ApiUser "director" {
-  password = "directorapi"
-  permissions = [ "*" ]
-}
