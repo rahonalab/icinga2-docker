@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Set localtime
+unlink /etc/localtime
+ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
+echo "Time set to ${LOCALTIME}"
+
+
 if [ ! "$(ls -A /etc/icingaweb2/config.ini)" ]; then
 export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
 	

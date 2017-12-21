@@ -31,17 +31,6 @@ if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
 	#Make sure the directories exist
 	mkdir -p /var/lib/icinga2/certs
 	chown -R nagios:nagios /var/lib/icinga2/certs
-	#Create new certificate
-	#icinga2 pki new-cert --cn $(hostname) \
-	#	--key /var/lib/icinga2/certs/$(hostname).key \
-	#	--cert /var/lib/icinga2/certs/$(hostname).crt
-	#Save certificate
-	#icinga2 pki save-cert \
-	#	--key /var/lib/icinga2/certs/$(hostname).key \
-	#	--cert /var/lib/icinga2/certs/$(hostname).crt \
-        #--trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt \
-        #--host ${ICINGA2_MASTER}
-	
 	#Save certificate
 	icinga2 pki save-cert \
         --trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt \
@@ -54,7 +43,7 @@ if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
 	cat <<EOF >/etc/icinga2/zones.conf
 	#Generated (with variables!) by docker
 	
-	#We:
+	#Ourselves:
 	object Endpoint "$(hostname)" {
 	host = "$(hostname)"
 	}
@@ -64,7 +53,7 @@ if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
 	host = "${ICINGA2_MASTER_IP}"
 	}
 
-	#Us and our zone:
+	#Ourselves and our zone:
 	object Zone "${ICINGA2_ZONE}" {
 	endpoints = [ "$(hostname)" ]
   	parent = "master"

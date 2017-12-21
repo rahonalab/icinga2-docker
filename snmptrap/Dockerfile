@@ -30,11 +30,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-RUN echo Europe/Rome >/etc/timezone && \
-dpkg-reconfigure -f noninteractive tzdata
-
-RUN echo "deb http://http.debian.net/debian/ stretch main contrib non-free" > /etc/apt/sources.list
-
 ADD content/ /
 
 # Initialize and run Supervisor

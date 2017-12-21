@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Set localtime
+unlink /etc/localtime
+ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
+echo "Time set to ${LOCALTIME}"
+
+
 if [ ! "$(ls -A /etc/icinga2/conf.d)" ]; then
  
 /opt/setup/icinga2

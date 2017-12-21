@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#Set localtime
+unlink /etc/localtime
+ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
+echo "Time set to ${LOCALTIME}"
+
 echo "Checking for new mibs in /mibs"
 if [ ! -z "`find /mibs -type f`" ]; then
 mv /mibs/snmptt.conf /etc/snmp/

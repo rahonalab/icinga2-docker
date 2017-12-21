@@ -39,9 +39,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-RUN echo Europe/Rome >/etc/timezone && \
-dpkg-reconfigure -f noninteractive tzdata
-
 #Second apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
      && wget --quiet -O - https://packages.icinga.org/icinga.key \
