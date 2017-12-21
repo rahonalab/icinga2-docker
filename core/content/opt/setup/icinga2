@@ -30,7 +30,7 @@ icinga2 feature enable ido-mysql livestatus compatlog perfdata command
 if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
 	#Make sure the directories exist
 	mkdir -p /var/lib/icinga2/certs
-	chown -R icinga:icinga /var/lib/icinga2/certs
+	chown -R nagios:nagios /var/lib/icinga2/certs
 	#Create new certificate
 	#icinga2 pki new-cert --cn $(hostname) \
 	#	--key /var/lib/icinga2/certs/$(hostname).key \
