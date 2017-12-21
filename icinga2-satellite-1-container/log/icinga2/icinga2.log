@@ -9281,3 +9281,16 @@
 [2017-12-21 17:46:51 +0000] warning/JsonRpcConnection: API client disconnected for identity 'vps213720.ovh.net'
 [2017-12-21 17:46:51 +0000] warning/ApiListener: Removing API client for endpoint 'vps213720.ovh.net'. 0 API clients left.
 [2017-12-21 17:46:51 +0000] warning/ApiListener: Removing API client for endpoint 'vps213720.ovh.net'. 0 API clients left.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Reconnecting to endpoint 'vps213720.ovh.net' via host '51.254.222.254' and port '5665'
+[2017-12-21 17:47:47 +0000] information/ApiListener: New client connection for identity 'vps213720.ovh.net' to [51.254.222.254]:5665
+[2017-12-21 17:47:47 +0000] information/ApiListener: Requesting new certificate for this Icinga instance from endpoint 'vps213720.ovh.net'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Finished reconnecting to endpoint 'vps213720.ovh.net' via host '51.254.222.254' and port '5665'
+[2017-12-21 17:47:47 +0000] information/ApiListener: Sending config updates for endpoint 'vps213720.ovh.net' in zone 'master'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Finished sending config file updates for endpoint 'vps213720.ovh.net' in zone 'master'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Syncing runtime objects to endpoint 'vps213720.ovh.net'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Finished syncing runtime objects to endpoint 'vps213720.ovh.net'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Finished sending runtime config updates for endpoint 'vps213720.ovh.net' in zone 'master'.
+[2017-12-21 17:47:47 +0000] information/ApiListener: Sending replay log for endpoint 'vps213720.ovh.net' in zone 'master'.
+[2017-12-21 17:47:49 +0000] information/ApiListener: Replayed 5048 messages.
+[2017-12-21 17:47:49 +0000] information/ApiListener: Finished sending replay log for endpoint 'vps213720.ovh.net' in zone 'master'.
+[2017-12-21 17:47:49 +0000] information/ApiListener: Finished syncing endpoint 'vps213720.ovh.net' in zone 'master'.
