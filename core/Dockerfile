@@ -18,6 +18,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  gnupg2 \
           mailutils \
           mysql-client \
+	  nagios-plugins-contrib \
+          nagios-snmp-plugins \
           net-tools \
           ntp       \
           procps \

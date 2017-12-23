@@ -1,10 +1,12 @@
 #!/bin/bash
 #Original file from jjethwa/icinga2
-#Modified to connect to the MariaDB container
 
 echo "=> Ok, new installation. I will run some scripts"
 echo "=> Copying fresh config-files for /etc/icinga2"
 cp -R /etc/icinga2.dist/* /etc/icinga2/
+
+#We are on a satellite setup, so do not include conf.d
+sed -i 's/include_recursive "conf.d"/#include_recursive "conf.d"/' /etc/icinga2/icinga2.conf
 
 # chown directories and files that might be coming from volumes
 mkdir -p /var/log/icinga2/compat/archives
