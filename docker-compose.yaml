@@ -25,7 +25,6 @@ services:
     hostname: ${FIRSTNAME}-sql
     volumes:
       - ./${FIRSTNAME}-container/lib/mysql:/var/lib/mysql
-    restart: always
   web:
    image: rahonabe/icinga2-web
    env_file: ./secrets.env
