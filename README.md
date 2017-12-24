@@ -4,8 +4,6 @@ This repository contains a (quasi-)modular image of the Icinga2 monitor systems,
 
 It is slightly based on the original Dockerfile by [https://github.com/jjethwa/icinga2] (Jordan Jethwa's icinga2 docker image), which is also available as a dockerhub-repository is located at [https://hub.docker.com/r/jordan/icinga2/](https://hub.docker.com/r/jordan/icinga2/).
 
-
-
 ## Image details
 
 1. Features four containers:
@@ -54,11 +52,11 @@ I will soon add a dedicated docker-compose to run a master or a client setup, bu
 
 To remove one container (but not conf and data stored, see below!) do:
 
-docker-compose rm core|web|snmptrap|sql
+   docker-compose rm core|web|snmptrap|sql
 
 or:
 
-docker-compose rm
+   docker-compose rm
 
 to remove all the containers.
 
