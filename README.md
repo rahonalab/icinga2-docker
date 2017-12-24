@@ -18,6 +18,7 @@ It is slightly based on the original Dockerfile by [https://github.com/jjethwa/i
 
 1. Key-Features:
    - icinga2
+   - auto-setup as a satellite from master
    - icingacli
    - icingaweb2
    - icingaweb2-pnp4nagios module
@@ -46,9 +47,13 @@ then start the four containers:
 
 et voilà, you are set! You will find:
 
-	- icinga2 running on port 5665;
-        - icingaweb running on port 80;
-        - snmptrap running on port 162
+  - icinga2 running on port 5665;
+  - icingaweb running on port 80;
+  - snmptrap running on port 162
+
+The system is meant to be run as a satellite, in a master-satellite setup, as described [here](https://www.icinga.com/docs/icinga2/latest/doc/06-distributed-monitoring/); this means that the conf.d directory is disabled in icinga2.conf file, with system retrieving conf files from a master. 
+
+I will soon add a dedicated docker-compose to run a master or a client setup, but in the meanwhile just edit the icinga2.conf file to feed the icinga2 system from conf files from conf.d/.
 
 ## Volume Reference
 
@@ -57,24 +62,12 @@ The directives in docker-compose.yaml create a series of directories in the ${FI
 In order to get a full clean system, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
 
 
-| Volume | ro/rw | Description & Usage |
+| Host | Container:directory | Description & Usage |
 | ------ | ----- | ------------------- |
-| /etc/apache2/ssl | **ro** | Mount optional SSL-Certificates (see SSL Support) |
-| /etc/ssmtp/revaliases | **ro** | revaliases map (see Sending Notification Mails) |
-| /etc/ssmtp/ssmtp.conf | **ro** | ssmtp configufation (see Sending Notification Mails) |
-| /etc/icinga2 | rw | Icinga2 configuration folder |
-| /etc/icingaweb2 | rw | Icingaweb2 configuration folder |
-| /var/lib/mysql | rw | MySQL Database |
-| /var/lib/icinga2 | rw | Icinga2 Data |
-| /var/lib/php5/sessions/ | rw | Icingaweb2 PHP Session Files |
-| /usr/lib/nagios/plugins | rw | nagios plugins' directory |
-| /var/log/apache2 | rw | logfolder for apache2 (not neccessary) |
-| /var/log/icinga2 | rw | logfolder for icinga2 (not neccessary) |
-| /var/log/icingaweb2 | rw | logfolder for icingaweb2 (not neccessary) |
-| /var/log/mysql | rw | logfolder for mysql (not neccessary) |
-| /var/log/supervisor | rw | logfolder for supervisord (not neccessary) |
-| /var/spool/icinga2 | rw | spool-folder for icinga2 (not neccessary) |
-| /var/cache/icinga2 | rw | cache-folder for icinga2 (not neccessary) |
+| ./${FIRSTNAME}-container/etc/icinga2 | core:/etc/icinga2 | Icinga2 configuration folder |
+| ./${FIRSTNAME}-container/etc/icingaweb2 | web:/etc/icingaweb2 | Icingaweb2 configuration folder |
+
+(**more to describe**)
 
 ## Icinga Web 2
 
