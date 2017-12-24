@@ -24,7 +24,7 @@ services:
     domainname: ${DOMAINNAME}
     hostname: ${FIRSTNAME}-sql
     volumes:
-      - ./${FIRSTNAME}-container/lib/mariadb:/var/lib/mariadb
+      - ./${FIRSTNAME}-container/lib/mysql:/var/lib/mysql
     restart: always
   web:
    image: rahonabe/icinga2-web

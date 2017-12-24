@@ -1,55 +1,88 @@
 # icinga2-docker
 
-This repository is an initial fork of [https://github.com/jjethwa/icinga2] (Jordan Jethwa's icinga2 docker image), which is also available as a dockerhub-repository is located at [https://hub.docker.com/r/jordan/icinga2/](https://hub.docker.com/r/jordan/icinga2/).
+This repository contains a (quasi-)modular image of the Icinga2 monitor systems, orchestrated by docker-compose.
+
+It is slightly based on the original Dockerfile by [https://github.com/jjethwa/icinga2] (Jordan Jethwa's icinga2 docker image), which is also available as a dockerhub-repository is located at [https://hub.docker.com/r/jordan/icinga2/](https://hub.docker.com/r/jordan/icinga2/).
 
 
 
 ## Image details
 
-1. Based on debian:jessie
+1. Features four containers:
+   - core: the icinga2 system, plus the ssmtp facility
+   - web: icingaweb2, the web-based, eye-candy gui, plus pnp4nagios
+   - sql: library/mariadb (no modification, no dockerfile, just as-is)
+   - snmptrap: an snmptrap system based on snmptt, snmptrapd
+   
+1. Based on debian:jessie-slim (core, snmptrap) and debian:stretch-slim (web)
+
 1. Key-Features:
    - icinga2
    - icingacli
    - icingaweb2
-   - icingaweb2-director module
-   - icingaweb2-graphite module
-   - icingaweb2-module-aws
+   - icingaweb2-pnp4nagios module
    - ssmtp
-   - MySQL
+   - MariaDB
    - Supervisor
    - Apache2
    - SSL Support
    - pnp4nagios
    - a bunch of special plugins for monitoring ups, printer and temp sensor (via SNMP)
 1. No SSH. Use docker [exec](https://docs.docker.com/engine/reference/commandline/exec/) or [nsenter](https://github.com/jpetazzo/nsenter)
+
 1. If passwords are not supplied, they will be randomly generated and shown via stdout.
 
 ## Usage
 
-First, build the image with
+Images are not (yet) available on docker hub, sorry!
 
-    docker build .
+However, just clone this repository, set variables in secrets.env and .env and build the image with:
 
-then start a new container and bind to host's port 80
+    docker-compose build
 
-    docker run -p 80:80 -t <image_id>
+then start the four containers:
+
+    docker-compose up
+
+et voilà, you are set! You will find:
+
+	- icinga2 running on port 5665;
+        - icingaweb running on port 80;
+        - snmptrap running on port 162
+
+## Volume Reference
+
+The directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of container.
+
+In order to get a full clean system, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
+
+
+| Volume | ro/rw | Description & Usage |
+| ------ | ----- | ------------------- |
+| /etc/apache2/ssl | **ro** | Mount optional SSL-Certificates (see SSL Support) |
+| /etc/ssmtp/revaliases | **ro** | revaliases map (see Sending Notification Mails) |
+| /etc/ssmtp/ssmtp.conf | **ro** | ssmtp configufation (see Sending Notification Mails) |
+| /etc/icinga2 | rw | Icinga2 configuration folder |
+| /etc/icingaweb2 | rw | Icingaweb2 configuration folder |
+| /var/lib/mysql | rw | MySQL Database |
+| /var/lib/icinga2 | rw | Icinga2 Data |
+| /var/lib/php5/sessions/ | rw | Icingaweb2 PHP Session Files |
+| /usr/lib/nagios/plugins | rw | nagios plugins' directory |
+| /var/log/apache2 | rw | logfolder for apache2 (not neccessary) |
+| /var/log/icinga2 | rw | logfolder for icinga2 (not neccessary) |
+| /var/log/icingaweb2 | rw | logfolder for icingaweb2 (not neccessary) |
+| /var/log/mysql | rw | logfolder for mysql (not neccessary) |
+| /var/log/supervisor | rw | logfolder for supervisord (not neccessary) |
+| /var/spool/icinga2 | rw | spool-folder for icinga2 (not neccessary) |
+| /var/cache/icinga2 | rw | cache-folder for icinga2 (not neccessary) |
 
 ## Icinga Web 2
 
 Icinga Web 2 can be accessed at [http://localhost/icingaweb2](http://localhost/icingaweb2) with the credentials *icingaadmin*:*icinga* (if not set differently via variables).
 
-### Saving PHP Sessions
+# Sending Notification Mails
 
-If you want to save your php-sessions over multiple boots, mount `/var/lib/php5/sessions/` into your container. Session files will get saved there.
-
-example:
-```
-docker run [...] -v $PWD/icingaweb2-sessions:/var/lib/php5/sessions/ jordan/icinga2
-```
-
-## Sending Notification Mails
-
-The container has `ssmtp` installed, which forwards mails to a preconfigured static server.
+The core container has `ssmtp` installed, which forwards mails to a preconfigured static server.
 
 You have to create the files `ssmtp.conf` for general configuration and `revaliases` (mapping from local Unix-user to mail-address).
 
@@ -87,16 +120,6 @@ If this does not work, please ask your provider for the correct mail-settings or
 Also you can debug your config, by executing inside your container `ssmtp -v $address` and pressing 2x Enter.
 It will send an e-Mail to `$address` and give verbose log and all error-messages.
 
-## SSL Support
-
-For enabling of SSL support, just add a volume to `/etc/apache2/ssl`, which contains these files:
-
-- `icinga2.crt`: The certificate file for apache
-- `icinga2.key`: The corresponding private key
-- `icinga2.chain` (optional): If a certificate chain is needed, add this file. Consult your CA-vendor for additional info.
-
-For https-redirection or http/https dualstack consult `APACHE2_HTTP` env-variable.
-
 # Adding own modules
 
 To use your own modules, you're able to install these into `enabledModules`-folder of your `/etc/icingaweb2` volume.
@@ -121,29 +144,4 @@ To use your own modules, you're able to install these into `enabledModules`-fold
 | `ICINGA2_USER_FULLNAME` | Icinga | Sender's display-name for notification e-Mails |
 | `APACHE2_HTTP` | `REDIRECT` | **Variable is only active, if both SSL-certificate and SSL-key are in place.** `BOTH`: Allow HTTP and https connections simulateously. `REDIRECT`: Rewrite HTTP-requests to HTTPS |
 
-## Volume Reference
 
-All these folders are exposed and able to get mounted as volume. Run
-
-	docker inspect <container>
-
-to get their current position on host filesystem. 
-
-| Volume | ro/rw | Description & Usage |
-| ------ | ----- | ------------------- |
-| /etc/apache2/ssl | **ro** | Mount optional SSL-Certificates (see SSL Support) |
-| /etc/ssmtp/revaliases | **ro** | revaliases map (see Sending Notification Mails) |
-| /etc/ssmtp/ssmtp.conf | **ro** | ssmtp configufation (see Sending Notification Mails) |
-| /etc/icinga2 | rw | Icinga2 configuration folder |
-| /etc/icingaweb2 | rw | Icingaweb2 configuration folder |
-| /var/lib/mysql | rw | MySQL Database |
-| /var/lib/icinga2 | rw | Icinga2 Data |
-| /var/lib/php5/sessions/ | rw | Icingaweb2 PHP Session Files |
-| /usr/lib/nagios/plugins | rw | nagios plugins' directory |
-| /var/log/apache2 | rw | logfolder for apache2 (not neccessary) |
-| /var/log/icinga2 | rw | logfolder for icinga2 (not neccessary) |
-| /var/log/icingaweb2 | rw | logfolder for icingaweb2 (not neccessary) |
-| /var/log/mysql | rw | logfolder for mysql (not neccessary) |
-| /var/log/supervisor | rw | logfolder for supervisord (not neccessary) |
-| /var/spool/icinga2 | rw | spool-folder for icinga2 (not neccessary) |
-| /var/cache/icinga2 | rw | cache-folder for icinga2 (not neccessary) |
