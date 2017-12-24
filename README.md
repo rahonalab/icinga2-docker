@@ -48,13 +48,23 @@ et voilà, you are set! You will find:
   - icingaweb running on port 80;
   - snmptrap running on port 162
 
-The system is meant to be run as a satellite, in a master-satellite setup, as described [here](https://www.icinga.com/docs/icinga2/latest/doc/06-distributed-monitoring/); this means that the conf.d directory is disabled in icinga2.conf file, with system retrieving conf files from a master. 
+The system is meant to be run as a satellite, in a master-satellite setup, as described [here](https://www.icinga.com/docs/icinga2/latest/doc/06-distributed-monitoring/); this means that the conf.d/ directory is disabled in icinga2.conf file, with system retrieving conf files from a master. 
 
-I will soon add a dedicated docker-compose to run a master or a client setup, but in the meanwhile just edit the icinga2.conf file to feed the icinga2 system from conf files from conf.d/.
+I will soon add a dedicated docker-compose to run a master or a client setup, but in the meanwhile just edit the icinga2.conf file to feed the icinga2 system from from conf.d/.
+
+To remove one container (but not conf and data stored, see below!) do:
+
+docker-compose rm core|web|snmptrap|sql
+
+or:
+
+docker-compose rm
+
+to remove all the containers.
 
 ## Volume Reference
 
-The directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of container.
+The directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of containers.
 
 In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
 
