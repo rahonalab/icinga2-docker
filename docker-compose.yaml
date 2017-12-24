@@ -18,6 +18,8 @@ services:
        - ./${FIRSTNAME}-container/log/icinga2:/var/log/icinga2
        - ./${FIRSTNAME}-container/run/icinga2:/var/run/icinga2
        - ./${FIRSTNAME}-container/spool/icinga2:/var/spool/icinga2
+     volumes_from:
+       - sql
   sql:
     image: mariadb
     env_file: ./secrets.env
@@ -44,6 +46,7 @@ services:
      - ./${FIRSTNAME}-container/certs:/etc/apache2/ssl:ro
    volumes_from:
      - core
+     - sql
   snmptrap:
    image: rahonabe/icinga2-snmptrap
    env_file: ./secrets.env

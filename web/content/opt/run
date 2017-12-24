@@ -6,18 +6,48 @@ ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
 echo "Time set to ${LOCALTIME}"
 
 
-if [ ! "$(ls -A /etc/icingaweb2/config.ini)" ]; then
+#If we cannot find our directory in mysql, connect to the DB
+if [ ! -d "/var/lib/mysql/icingaweb2" ]; then
+#Hash the icingaweb2 admin pass
 export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
-	
-/opt/setup/icingaweb2
+#connect as root
+mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
+
+#Wait until MariaDB container is ready
+while ! $mysql -e status &> /dev/null; do
+    sleep 1s
+    echo -n "."
+  done
+
+
+# create and grant access to DB
+$mysql <<-END
+  CREATE DATABASE IF NOT EXISTS icingaweb2;
+  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icingaweb2.* TO 'icingaweb2'@'%' IDENTIFIED BY '${ICINGAWEB2_PASSWORD}';
+END
+
+$mysql icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql
+
+$mysql <<-END
+  USE icingaweb2;
+  INSERT IGNORE INTO icingaweb_user (name, active, password_hash) VALUES ('${ICINGAWEB2_ADMIN_USER}', 1, '${ICINGAWEB2_ADMIN_PASS_HASH}');
+END
+
 
 cat <<-END
 ===================================================================
-Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICINGAWEB2_ADMIN_PASS}
 Icingweb2 Maria DB password was set in the secret file to ${ICINGAWEB2_PASSWORD}
+Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICINGAWEB2_ADMIN_PASS}
 ===================================================================
 
 END
+fi
+
+#If we cannot find magic file, create it
+if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
+	
+/opt/setup/icingaweb2
+
 fi
 
 #Remove staled pids

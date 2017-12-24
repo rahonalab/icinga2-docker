@@ -1,14 +1,28 @@
 #!/bin/bash
 
-#Set localtime
+#Set localtime at every boot
 unlink /etc/localtime
 ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
 echo "Time set to ${LOCALTIME}"
 
+#If we didn't find us in mysql, connect to MariaDB container and setup the DB
+if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then
+mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
 
-if [ ! "$(ls -A /etc/icinga2/conf.d)" ]; then
- 
-/opt/setup/icinga2
+#Wait until MariaDB container is ready
+while ! $mysql -e status &> /dev/null; do
+    sleep 1s
+    echo -n "."
+  done
+
+#Create DB and users
+$mysql <<-END
+  CREATE DATABASE IF NOT EXISTS icinga2idomysql;
+  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga2idomysql.* TO 'icinga2idomysql'@'%' IDENTIFIED BY '${ICINGA_PASSWORD}';
+END
+
+#Import schemas
+$mysql icinga2idomysql < /usr/share/icinga2-ido-mysql/schema/mysql.sql
 
 cat <<-END
 ===================================================================
@@ -17,6 +31,14 @@ Icinga2idomysql password was set in the secret file to ${ICINGA_PASSWORD}
 ===================================================================
 
 END
+fi
+
+
+#If we didn't find the magic file, configure Icinga2
+if [ ! -f "/etc/icinga2/CONFIGURED" ]; then
+ 
+/opt/setup/icinga2
+
 fi
 
 #CONFIG SSMTP at every boot

@@ -12,22 +12,6 @@ chown -R www-data:adm /var/log/icingaweb2
 mkdir -p /var/lib/php5/sessions
 chown -R www-data:www-data /var/lib/php5/sessions
 
-#connect as root
-mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
-
-#Wait until MariaDB container is ready
-while ! $mysql -e status &> /dev/null; do
-    sleep 1s
-    echo -n "."
-  done
-
-
-# grant access to DBs
-$mysql <<-END
-  CREATE DATABASE IF NOT EXISTS icingaweb2;
-  GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icingaweb2.* TO 'icingaweb2'@'%' IDENTIFIED BY '${ICINGAWEB2_PASSWORD}';
-END
-
 $mysql icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql >> /var/log/icingaweb2/icingaweb2-schema.log 2>&1
 
 #Setting icingaweb2 ini
@@ -66,13 +50,11 @@ permissions = "*"
 groups = "Administrators"
 END
 
-$mysql <<-END
-  USE icingaweb2;
-  INSERT IGNORE INTO icingaweb_user (name, active, password_hash) VALUES ('${ICINGAWEB2_ADMIN_USER}', 1, '${ICINGAWEB2_ADMIN_PASS_HASH}');
-END
-
 # enable modules
 icingacli module enable monitoring
 icingacli module enable doc
 icingacli module enable pnp
+
+#commit ourselves
+touch /etc/icingaweb2/CONFIGURED
 
