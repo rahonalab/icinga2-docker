@@ -29,9 +29,6 @@ It is slightly based on the original Dockerfile by [https://github.com/jjethwa/i
    - SSL Support
    - pnp4nagios
    - a bunch of special plugins for monitoring ups, printer and temp sensor (via SNMP)
-1. No SSH. Use docker [exec](https://docs.docker.com/engine/reference/commandline/exec/) or [nsenter](https://github.com/jpetazzo/nsenter)
-
-1. If passwords are not supplied, they will be randomly generated and shown via stdout.
 
 ## Usage
 
@@ -59,7 +56,7 @@ I will soon add a dedicated docker-compose to run a master or a client setup, bu
 
 The directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of container.
 
-In order to get a full clean system, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
+In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
 
 
 | Host | Container:directory | Description & Usage |
@@ -71,7 +68,7 @@ In order to get a full clean system, just remove the ${FIRSTNAME}/ (or just part
 
 ## Icinga Web 2
 
-Icinga Web 2 can be accessed at [http://localhost/icingaweb2](http://localhost/icingaweb2) with the credentials *icingaadmin*:*icinga* (if not set differently via variables).
+Icinga Web 2 can be accessed at [http://localhost/icingaweb2](http://localhost/icingaweb2) with the credentials set in secrets.env
 
 # Sending Notification Mails
 
@@ -119,22 +116,4 @@ To use your own modules, you're able to install these into `enabledModules`-fold
 
 ## Environment variables Reference
 
-| Environmental Variable | Default Value | Description |
-| ---------------------- | ------------- | ----------- |
-| `ICINGA_PASSWORD` | *randomly generated* | MySQL password for icinga |
-| `ICINGAWEB2_PASSWORD` | *randomly generated* | MySQL password for icingaweb2 |
-| `DIRECTOR_PASSWORD` | *randomly generated* | MySQL password for icinga director |
-| `IDO_PASSWORD` | *randomly generated* | MySQL password for ido |
-| `DEBIAN_SYS_MAINT_PASSWORD` | *randomly generated* | Password for debian-syst-maint account |
-| `ICINGA2_FEATURE_GRAPHITE` | false | Set to true or 1 to enable graphite writer |
-| `ICINGA2_FEATURE_GRAPHITE_HOST` | graphite | hostname or IP address where Carbon/Graphite daemon is running |
-| `ICINGA2_FEATURE_GRAPHITE_PORT` | 2003 | Carbon port for graphite |
-| `ICINGA2_FEATURE_GRAPHITE_URL` | http://${ICINGA2_FEATURE_GRAPHITE_HOST} | Web-URL for Graphite |
-| `ICINGA2_FEATURE_DIRECTOR` | true | Set to false or 0 to disable icingaweb2 director |
-| `DIRECTOR_KICKSTART` | true | Set to false to disable icingaweb2 director's auto kickstart at container startup. *Value is only used, if icingaweb2 director is enabled.* |
-| `ICINGAWEB2_ADMIN_USER` | icingaadmin | Icingaweb2 Login User<br>*After changing the username, you should also remove the old User in icingaweb2-> Configuration-> Authentication-> Users* |
-| `ICINGAWEB2_ADMIN_PASS` | icinga | Icingaweb2 Login Password |
-| `ICINGA2_USER_FULLNAME` | Icinga | Sender's display-name for notification e-Mails |
-| `APACHE2_HTTP` | `REDIRECT` | **Variable is only active, if both SSL-certificate and SSL-key are in place.** `BOTH`: Allow HTTP and https connections simulateously. `REDIRECT`: Rewrite HTTP-requests to HTTPS |
-
-
+TODO
