@@ -1,7 +1,7 @@
 *.swp
 *.swo
 .DS_Store
-icinga2-*
+icinga2-satellite-*
 .env
 *.swn
 secrets.env

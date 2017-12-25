@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#We are on a satellite setup, so do not include conf.d
+sed -i 's/include_recursive "conf.d"/#include_recursive "conf.d"/' /etc/icinga2/icinga2.conf
+
+
+# enable necessary features
+icinga2 feature enable ido-mysql livestatus compatlog perfdata command
+
+#icinga2 API cert - regenerate new private key and certificate when running in a new container
+	#Make sure the directories exist
+	mkdir -p /var/lib/icinga2/certs
+	chown -R nagios:nagios /var/lib/icinga2/certs
+	#Save certificate
+	icinga2 pki save-cert \
+        --trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt \
+        --host ${ICINGA2_MASTER}
+	
+	#Finalize setup with the pre-generated ticket
+	icinga2 node setup --ticket ${ICINGA2_TICKET} --cn $(hostname) --endpoint ${ICINGA2_MASTER} --zone ${ICINGA2_ZONE} --master_host ${ICINGA2_MASTER} --trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt --accept-commands --accept-config
+	
+	#Write zone file
+	cat <<EOF >/etc/icinga2/zones.conf
+	#Generated (with variables!) by docker
+	
+	#Ourselves:
+	object Endpoint "$(hostname)" {
+	host = "$(hostname)"
+	}
+	
+	#The master
+	object Endpoint "${ICINGA2_MASTER}" {
+	host = "${ICINGA2_MASTER_IP}"
+	}
+
+	#Ourselves and our zone:
+	object Zone "${ICINGA2_ZONE}" {
+	endpoints = [ "$(hostname)" ]
+  	parent = "master"
+	}
+	
+	#Master zone
+	object Zone "master" {
+  	endpoints = [ "${ICINGA2_MASTER}" ]
+	}
+	
+	#Global commands (on master)
+	object Zone "global-templates" {
+  	global = true
+	}
+	
+EOF
+
