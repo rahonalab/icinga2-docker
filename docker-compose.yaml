@@ -15,6 +15,7 @@ services:
        - ./${FIRSTNAME}-container/cache/icinga2:/var/cache/icinga2
        - ./${FIRSTNAME}-container/etc/icinga2:/etc/icinga2
        - ./${FIRSTNAME}-container/lib/icinga2:/var/lib/icinga2
+       - ./${FIRSTNAME}-container/nagios-plugins:/usr/lib/nagios/plugins
        - ./${FIRSTNAME}-container/log/icinga2:/var/log/icinga2
        - ./${FIRSTNAME}-container/run/icinga2:/var/run/icinga2
        - ./${FIRSTNAME}-container/spool/icinga2:/var/spool/icinga2
@@ -53,7 +54,7 @@ services:
    links:
      - core
    domainname: ${DOMAINNAME}
-   hostname: ${FIRSTNAME}-snmtrap
+   hostname: ${FIRSTNAME}-snmptrap
    build: 
     context: ./snmptrap
    ports:

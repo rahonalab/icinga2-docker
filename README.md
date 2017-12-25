@@ -16,7 +16,7 @@ It is slightly based on the original Dockerfile by [https://github.com/jjethwa/i
 
 1. Key-Features:
    - icinga2
-   - auto-setup as a satellite from master
+   - auto-setup as a satellite or a master, you choose!
    - icingacli
    - icingaweb2
    - icingaweb2-pnp4nagios module
@@ -46,9 +46,7 @@ et voilà, you are set! You will find:
   - icingaweb running on port 80;
   - snmptrap running on port 162
 
-The system is meant to be run as a satellite, in a master-satellite setup, as described [here](https://www.icinga.com/docs/icinga2/latest/doc/06-distributed-monitoring/); this means that the conf.d/ directory is disabled in icinga2.conf file, with system retrieving conf files from a master. 
-
-I will soon add a dedicated docker-compose to run a master or a client setup, but in the meanwhile just edit the icinga2.conf file to feed the icinga2 system from from conf.d/.
+The system is meant to be run in a master-satellite setup, as described [here](https://www.icinga.com/docs/icinga2/latest/doc/06-distributed-monitoring/); set the ${TYPE} variable in secrets.env to your need. If you are not interested in master-satellite setup, just set the variable to 'master'.
 
 To remove one container (but not conf and data stored, see below!) do:
 
@@ -70,6 +68,7 @@ In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or 
 | Host | Container:directory | Description & Usage |
 | ------ | ----- | ------------------- |
 | ./${FIRSTNAME}-container/etc/icinga2 | core:/etc/icinga2 | Icinga2 configuration folder |
+| ./${FIRSTNAME}-container/nagios-plugins | core:/usr/lib/nagios/plugins | Plugins dir for Icinga2 |
 | ./${FIRSTNAME}-container/etc/icingaweb2 | web:/etc/icingaweb2 | Icingaweb2 configuration folder |
 
 (**more to describe**)

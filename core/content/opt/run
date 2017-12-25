@@ -34,18 +34,72 @@ END
 fi
 
 
-#If we didn't find the magic file, configure Icinga2
-if [ ! -f "/etc/icinga2/CONFIGURED" ]; then
- 
-/opt/setup/icinga2
+#Let's see if we have to run setup
+if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
+
+#Original file from jjethwa/icinga2
+echo "=> Ok, new installation. I will run some scripts"
+echo "=> Copying fresh config-files for /etc/icinga2"
+cp -R /etc/icinga2.dist/* /etc/icinga2/
+cp -R /usr/lib/nagios/plugins.dist/* /usr/lib/nagios/plugins/
+
+
+# chown directories and files that might be coming from volumes
+mkdir -p /var/log/icinga2/compat/archives
+chown -R nagios:adm /var/log/icinga2
+
+mkdir -p /var/lib/icinga2/api/zones
+mkdir -p /var/lib/icinga2/api/log
+mkdir -p /var/lib/icinga2/api/repository
+mkdir -p /var/spool/icinga2/perfdata
+mkdir -p /var/spool/icinga2/tmp
+
+chown -R nagios:nagios /var/lib/icinga2
+chown -R nagios:nagios /var/spool/icinga2
+chown -R nagios:nagios /var/cache/icinga2
+
+chown -R nagios:root /etc/icinga2
+
+#master or satellite? Ask TYPE
+echo "Ok, I am going to setup icinga2 in ${TYPE} mode"
+if [ ${TYPE} = "satellite" ]; then
+
+/opt/setup/icinga2-satellite
 
 fi
+
+if [ ${TYPE} = "master" ]; then
+
+/opt/setup/icinga2-master
+
+fi
+
+chfn -f "${ICINGA2_USER_FULLNAME}" nagios
+
+# IDO MySQL
+cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
+/**
+ * The db_ido_mysql library implements IDO functionality
+ * for MySQL.
+ */
+
+library "db_ido_mysql"
+
+object IdoMysqlConnection "ido-mysql" {
+  user = "icinga2idomysql",
+  password = "${ICINGA_PASSWORD}",
+  host = "sql",
+  database = "icinga2idomysql"
+}
+END
+fi
+
 
 #CONFIG SSMTP at every boot
 /opt/setup/ssmtp
 
 #START ICINGA2
-echo "=> Starting Icinga2"
+echo "Starting Icinga2 (${TYPE} mode)"
 
 icinga2 daemon --validate
 
