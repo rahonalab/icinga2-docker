@@ -1,6 +1,6 @@
 # icinga2-docker
 
-This repository contains a (quasi-)modular image of the Icinga2 monitor systems, orchestrated by docker-compose.
+This repository contains a (quasi-)modular image of the Icinga2 monitor systems, orchestrated by docker-compose; to ensures portability through different versions of containers, it uses permanent volumes for storage of config files and data.
 
 It is slightly based on the original Dockerfile by [https://github.com/jjethwa/icinga2] (Jordan Jethwa's icinga2 docker image), which is also available as a dockerhub-repository is located at [https://hub.docker.com/r/jordan/icinga2/](https://hub.docker.com/r/jordan/icinga2/).
 
@@ -60,18 +60,26 @@ to remove all the containers.
 
 ## Volume Reference
 
-The directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of containers.
+Directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of containers.
 
 In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
 
 
 | Host | Container:directory | Description & Usage |
 | ------ | ----- | ------------------- |
-| ./${FIRSTNAME}-container/etc/icinga2 | core:/etc/icinga2 | Icinga2 configuration folder |
+| ./${FIRSTNAME}-container/etc/icinga2 | core:/etc/icinga2 | Icinga2 configuration dir |
+| ./${FIRSTNAME}-container/lib/icinga2 | core:/var/lib/icinga2 | Library dir for icinga2. You find certificate files here. |
 | ./${FIRSTNAME}-container/nagios-plugins | core:/usr/lib/nagios/plugins | Plugins dir for Icinga2 |
-| ./${FIRSTNAME}-container/etc/icingaweb2 | web:/etc/icingaweb2 | Icingaweb2 configuration folder |
+| ./${FIRSTNAME}-container/cache/icinga2 | core:/var/cache/icinga2 | Cache dir for Icinga2. Just for debug |
+| ./${FIRSTNAME}-container/log/icinga2 | core:/var/log/icinga2 | Log dir for Icinga2 |
+| ./${FIRSTNAME}-container/run/icinga2 | core:/var/run/icinga2 | Run dir for icinga2. Send external command on icinga2.cmd, used by web |
+| ./${FIRSTNAME}-container/spool/icinga2 | core:/var/spool/icinga2 | Spool dir for icinga2. Contains perf data used by pnp4nagios  |
+| ./${FIRSTNAME}-container/etc/icingaweb2 | web:/etc/icingaweb2 | Icingaweb2 configuration dir |
 
 (**more to describe**)
+
+## Update an existing system
+If you already have a working Icinga2 system, just copy your config (/etc/icinga2) and certificate (/var/lib/icinga2/certs or /etc/icinga2/pki for icinga < 2.8) files in the directories listed above. The setup will automatically detect the presence of certificate files in /var/lib/icinga2/certs and will skip the configuration process.
 
 ## Icinga Web 2
 
