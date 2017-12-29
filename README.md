@@ -72,11 +72,14 @@ In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or 
 | ./${FIRSTNAME}-container/nagios-plugins | core:/usr/lib/nagios/plugins | Plugins dir for Icinga2 |
 | ./${FIRSTNAME}-container/cache/icinga2 | core:/var/cache/icinga2 | Cache dir for Icinga2. Just for debug |
 | ./${FIRSTNAME}-container/log/icinga2 | core:/var/log/icinga2 | Log dir for Icinga2 |
-| ./${FIRSTNAME}-container/run/icinga2 | core:/var/run/icinga2 | Run dir for icinga2. Send external command on icinga2.cmd, used by web |
-| ./${FIRSTNAME}-container/spool/icinga2 | core:/var/spool/icinga2 | Spool dir for icinga2. Contains perf data used by pnp4nagios  |
+| ./${FIRSTNAME}-container/run/icinga2 | core:/var/run/icinga2 | Run dir for icinga2. Send external command on icinga2.cmd (used by web) |
+| ./${FIRSTNAME}-container/spool/icinga2 | core:/var/spool/icinga2 | Spool dir for icinga2. Contains perf data used by pnp4nagios (used by web)  |
+| ./${FIRSTNAME}-container/lib/mysql |sql:/var/lib/mysql | Database files |
 | ./${FIRSTNAME}-container/etc/icingaweb2 | web:/etc/icingaweb2 | Icingaweb2 configuration dir |
-
-(**more to describe**)
+| ./${FIRSTNAME}-container/lib/php5/sessions | web:/var/lib/php5/sessions | php5 session files |
+| ./${FIRSTNAME}-container/log/apache2 | web:/var/log/apache2 | Log dir for Apache2 |
+| ./${FIRSTNAME}-container/certs| web:/etc/apache2/ssl:ro | Certs dir for Apache2 SSL (currently not implemented) |
+| ./${FIRSTNAME}-container/mibs| snmptrap:/mibs | Put new mibs and snmptt.conf here |
 
 ## Update an existing system
 If you already have a working Icinga2 system, just copy your config (/etc/icinga2) and certificate (/var/lib/icinga2/certs or /etc/icinga2/pki for icinga < 2.8) files in the directories listed above. The setup will automatically detect the presence of certificate files in /var/lib/icinga2/certs and will skip the configuration process.
