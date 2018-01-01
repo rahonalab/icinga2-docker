@@ -10,7 +10,7 @@ echo "Time set to ${LOCALTIME}"
 if [ ! -d "/var/lib/mysql/icingaweb2" ]; then
 #Hash the icingaweb2 admin pass
 export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
-#connect as root
+#set $mysql alias
 mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
 
 #Wait until MariaDB container is ready
@@ -43,7 +43,7 @@ Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICING
 END
 fi
 
-#If we cannot find magic file, create it
+#If we cannot find magic file, create the configuration
 if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
 	
 /opt/setup/icingaweb2
@@ -55,7 +55,7 @@ if [ -f "/var/run/rrdcached.pid" ]; then
 	rm /var/run/rrdcached.pid
 fi
 
-#Check whether rrdcached cache exist... (sorry the wordplay)
+#Check whether rrdcached cache exists... (sorry for the wordplay)
 if [ ! -d "/var/cache/rrdcached" ]; then
 	mkdir -p /var/cache/rrdcached
 	chown nagios: /var/cache/rrdcached

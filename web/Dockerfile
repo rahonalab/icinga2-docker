@@ -2,6 +2,7 @@
 # Dockerfile for an icingaweb2 system
 #Contains code from
 # https://github.com/jjethwa/icinga2
+#and following https://github.com/Icinga/icingaweb2/blob/master/doc/20-Advanced-Topics.md#web-setup-automation
 
 #Use debian:jessie
 FROM debian:jessie-slim
@@ -22,6 +23,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           ntp       \
 	  php5-cli \
 	  php5-gd \
+	  php5-intl \
+          php5-imagick \
           php5-curl \
           php5-ldap \
 	  php5-mysql \
@@ -61,17 +64,21 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 ADD content/ /
 
-# Set git to the master repository
-ARG GITREF_PNP=master
-
 #Get PNP modules
-RUN mkdir -p /usr/local/share/icingaweb2/modules/pnp \
-    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/${GITREF_PNP}.tar.gz" \
-    | tar xz --strip-components=1 --directory=/usr/local/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-${GITREF_PNP}/ \
-    && mv /etc/icingaweb2/ /etc/icingaweb2.dist \
-    && mkdir /etc/icingaweb2 \
-    && usermod -aG icingaweb2 www-data \
-    && usermod -aG nagios www-data
+RUN mkdir -p /usr/share/icingaweb2/modules/pnp \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-master/
+
+#Get director module
+RUN mkdir -p /usr/share/icingaweb2/modules/director \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-director/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/director -f - icingaweb2-module-director-master/
+
+#Set permissions
+RUN usermod -aG icingaweb2 www-data \
+&& usermod -aG nagios www-data
+
+RUN mv /etc/icingaweb2 /etc/icingaweb2.dist
  
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]

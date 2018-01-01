@@ -1,10 +1,11 @@
 #!/bin/bash
-echo "=> Copying fresh config-files for /etc/icingaweb2"
-  cp -R /etc/icingaweb2.dist/* /etc/icingaweb2/
+echo "=> Starting configuration..."
+
+cp -rvp /etc/icingaweb2.dist/* /etc/icingaweb2/
 
 # chown directories and files that might be coming from volumes
-chmod 2770 /etc/icingaweb2
-chown -R www-data:icingaweb2 /etc/icingaweb2
+
+icingacli setup config directory
 
 mkdir -p /var/log/icingaweb2
 chown -R www-data:adm /var/log/icingaweb2
@@ -15,10 +16,18 @@ chown -R www-data:www-data /var/lib/php5/sessions
 $mysql icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql >> /var/log/icingaweb2/icingaweb2-schema.log 2>&1
 
 #Setting icingaweb2 ini
+cat >> /etc/icingaweb2/authentication.ini <<-END
+
+[icingaweb2]
+backend             = "db"
+resource            = "icingaweb2"
+
+END
+
 #Resources
 cat >> /etc/icingaweb2/resources.ini <<-END
 
-[icingaweb_db]
+[icingaweb2]
 type = "db"
 db = "mysql"
 host = "sql"
@@ -30,7 +39,7 @@ prefix = "icingaweb_"
 charset = "utf8"
 persistent = "0"
 
-[icinga_ido]
+[icinga2]
 type = "db"
 db = "mysql"
 host = "sql"
@@ -42,18 +51,122 @@ charset = "utf8"
 persistent = "0"
 END
 
+#config.ini
+cat >> /etc/icingaweb2/config.ini <<-END
+
+[global]
+show_stacktraces = "1"
+config_backend = "db"
+config_resource = "icingaweb2"
+
+[logging]
+log = "file"
+level = "ERROR"
+file = "/var/log/icingaweb2/icingaweb2.log"
+
+END
+
 #Icingaweb2 user and password
 cat >> /etc/icingaweb2/roles.ini <<-END
+
 [Administrators]
 users = ${ICINGAWEB2_ADMIN_USER}
 permissions = "*"
 groups = "Administrators"
+
+END
+
+cat >> /etc/icingaweb2/groups.ini <<-END
+
+[icingaweb2]
+backend = "db"
+resource = "icingaweb2"
+
+END
+
+#Monitoring (base) module config
+mkdir -p /etc/icingaweb2/modules/monitoring
+cat >> /etc/icingaweb2/modules/monitoring/backends.ini <<-END
+
+[icinga2]
+type                = "ido"
+resource            = "icinga2"
+
+END
+
+
+cat >> /etc/icingaweb2/modules/monitoring/commandtransports.ini <<-END
+
+[icinga2]
+transport = "api"
+host = "core"
+port = "5665"
+username = "api"
+password = "api"
+
+END
+
+cat >> /etc/icingaweb2/modules/monitoring/config.ini <<-END
+
+[security]
+protected_customvars = "*pw*,*pass*,community"
+
 END
 
 # enable modules
 icingacli module enable monitoring
 icingacli module enable doc
 icingacli module enable pnp
+
+# Configure icinga2 director
+if [ ${ICINGA2_FEATURE_DIRECTOR} == "1" ] && [ ${TYPE} = "master" ]; then
+icingacli module enable director
+
+# director DB
+$mysql <<-END
+CREATE DATABASE IF NOT EXISTS director CHARACTER SET 'utf8';
+GRANT ALL ON director.* TO 'director'@'%' IDENTIFIED BY '${DIRECTOR_PASSWORD}';
+END
+	
+$mysql director < /usr/local/share/icingaweb2/modules/director/schema/mysql.sql >> /var/log/icingaweb2/director-schema.log 2>&1
+
+# director resource files
+
+cat >> /etc/icingaweb2/resources.ini << END
+
+[Director DB]
+type = "db"
+db = "mysql"
+host = "sql"
+dbname = "director"
+username = "director"
+password = "${DIRECTOR_PASSWORD}"
+charset = "utf8"
+
+END
+
+# director ini files
+
+cat >> /etc/icingaweb2/modules/director/config.ini << END
+
+[db]
+resource = "Director DB"
+
+END
+
+#director api user
+
+cat > /etc/icinga2/conf.d/icinga2-api-user.conf <<-END
+
+object ApiUser "${ICINGA2_FEATURE_DIRECTOR_USER}" {
+password = "${ICINGA2_FEATURE_DIRECTOR_PASS}"
+	  permissions = [ "*" ]
+}
+
+END
+
+fi
+
 
 #commit ourselves
 touch /etc/icingaweb2/CONFIGURED
