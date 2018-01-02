@@ -69,11 +69,6 @@ RUN mkdir -p /usr/share/icingaweb2/modules/pnp \
     && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/master.tar.gz" \
     | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-master/
 
-#Get director module
-RUN mkdir -p /usr/share/icingaweb2/modules/director \
-    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-director/archive/master.tar.gz" \
-    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/director -f - icingaweb2-module-director-master/
-
 #Set permissions
 RUN usermod -aG icingaweb2 www-data \
 && usermod -aG nagios www-data

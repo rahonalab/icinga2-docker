@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "=> Starting configuration..."
+echo "Starting text-files configuration..."
 
 cp -rvp /etc/icingaweb2.dist/* /etc/icingaweb2/
 
@@ -12,8 +12,6 @@ chown -R www-data:adm /var/log/icingaweb2
 
 mkdir -p /var/lib/php5/sessions
 chown -R www-data:www-data /var/lib/php5/sessions
-
-$mysql icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql >> /var/log/icingaweb2/icingaweb2-schema.log 2>&1
 
 #Setting icingaweb2 ini
 cat >> /etc/icingaweb2/authentication.ini <<-END
@@ -117,56 +115,6 @@ END
 icingacli module enable monitoring
 icingacli module enable doc
 icingacli module enable pnp
-
-# Configure icinga2 director
-if [ ${ICINGA2_FEATURE_DIRECTOR} == "1" ] && [ ${TYPE} = "master" ]; then
-icingacli module enable director
-
-# director DB
-$mysql <<-END
-CREATE DATABASE IF NOT EXISTS director CHARACTER SET 'utf8';
-GRANT ALL ON director.* TO 'director'@'%' IDENTIFIED BY '${DIRECTOR_PASSWORD}';
-END
-	
-$mysql director < /usr/local/share/icingaweb2/modules/director/schema/mysql.sql >> /var/log/icingaweb2/director-schema.log 2>&1
-
-# director resource files
-
-cat >> /etc/icingaweb2/resources.ini << END
-
-[Director DB]
-type = "db"
-db = "mysql"
-host = "sql"
-dbname = "director"
-username = "director"
-password = "${DIRECTOR_PASSWORD}"
-charset = "utf8"
-
-END
-
-# director ini files
-
-cat >> /etc/icingaweb2/modules/director/config.ini << END
-
-[db]
-resource = "Director DB"
-
-END
-
-#director api user
-
-cat > /etc/icinga2/conf.d/icinga2-api-user.conf <<-END
-
-object ApiUser "${ICINGA2_FEATURE_DIRECTOR_USER}" {
-password = "${ICINGA2_FEATURE_DIRECTOR_PASS}"
-	  permissions = [ "*" ]
-}
-
-END
-
-fi
-
 
 #commit ourselves
 touch /etc/icingaweb2/CONFIGURED

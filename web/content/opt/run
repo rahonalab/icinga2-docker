@@ -5,7 +5,10 @@ unlink /etc/localtime
 ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
 echo "Time set to ${LOCALTIME}"
 
+##Config: we separate db config from file config
 
+##DB config
+echo "Starting DB configuration..."
 #If we cannot find our directory in mysql, connect to the DB
 if [ ! -d "/var/lib/mysql/icingaweb2" ]; then
 #Hash the icingaweb2 admin pass
@@ -41,8 +44,9 @@ Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICING
 ===================================================================
 
 END
-fi
 
+fi
+##File config
 #If we cannot find magic file, create the configuration
 if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
 	
