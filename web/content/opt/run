@@ -65,7 +65,9 @@ if [ ! -d "/var/cache/rrdcached" ]; then
 	chown nagios: /var/cache/rrdcached
 fi
 
-#Ensures that perfdata/ has nagios privileges
+#Ensures that spool and perfdata/ have nagios privileges
+
+chown -R nagios:nagios /var/spool/icinga2
 
 chown -R nagios:nagios /var/lib/pnp4nagios/perfdata
 
