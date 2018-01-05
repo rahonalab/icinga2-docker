@@ -45,6 +45,7 @@ services:
      - ./${FIRSTNAME}-container/lib/php5/sessions:/var/lib/php5/sessions
      - ./${FIRSTNAME}-container/log/apache2:/var/log/apache2
      - ./${FIRSTNAME}-container/certs:/etc/apache2/ssl:ro
+     - ./${FIRSTNAME}-container/perfdata:/var/lib/pnp4nagios/perfdata
    volumes_from:
      - core
      - sql

@@ -65,6 +65,11 @@ if [ ! -d "/var/cache/rrdcached" ]; then
 	chown nagios: /var/cache/rrdcached
 fi
 
+#Ensures that perfdata/ has nagios privileges
+
+chown -R nagios:nagios /var/lib/pnp4nagios/perfdata
+
+
 ntpd -gq
 service ntp start
 
