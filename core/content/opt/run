@@ -25,7 +25,7 @@ mkdir -p /var/spool/icinga2/perfdata
 mkdir -p /var/spool/icinga2/tmp
 fi
 
-chown -R icinga2:icinga2 /var/lib/icinga2
+#chown -R icinga2:icinga2 /var/lib/icinga2
 chown -R icinga2:icinga2 /var/spool/icinga2
 chown -R icinga2:icinga2 /var/cache/icinga2
 
