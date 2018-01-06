@@ -12,7 +12,7 @@ if [ ! "$(ls -A /var/log/icinga2)" ]; then
 mkdir -p /var/log/icinga2/compat/archives
 fi
 
-chown -R icinga2:adm /var/log/icinga2
+chown -R nagios:adm /var/log/icinga2
 
 if [ ! "$(ls -A /var/lib/icinga2)" ]; then
 mkdir -p /var/lib/icinga2/api/zones
