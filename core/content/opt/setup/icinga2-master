@@ -2,7 +2,7 @@
 #Original file from jjethwa/icinga2
 
 # enable necessary features
-icinga2 feature enable ido-mysql livestatus compatlog perfdata notification command
+icinga2 feature enable ido-mysql livestatus perfdata notification command
 
 #icinga2 API cert - regenerate new private key and certificate when running in a new container
 	#Make sure the directories exist

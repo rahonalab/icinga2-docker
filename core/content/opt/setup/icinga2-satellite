@@ -5,7 +5,7 @@ sed -i 's/include_recursive "conf.d"/#include_recursive "conf.d"/' /etc/icinga2/
 
 
 # enable necessary features
-icinga2 feature enable ido-mysql livestatus compatlog perfdata command
+icinga2 feature enable ido-mysql livestatus perfdata command
 
 #icinga2 API cert - regenerate new private key and certificate when running in a new container
 	#Make sure the directories exist

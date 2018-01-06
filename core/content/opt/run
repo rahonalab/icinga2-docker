@@ -5,6 +5,32 @@ unlink /etc/localtime
 ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
 echo "Time set to ${LOCALTIME}"
 
+#Check directories and permissions
+# always chown directories and files that might be coming from volumes
+
+if [ ! "$(ls -A /var/log/icinga2)" ]; then
+mkdir -p /var/log/icinga2/compat/archives
+fi
+
+chown -R nagios:adm /var/log/icinga2
+
+if [ ! "$(ls -A /var/lib/icinga2)" ]; then
+mkdir -p /var/lib/icinga2/api/zones
+mkdir -p /var/lib/icinga2/api/log
+mkdir -p /var/lib/icinga2/api/repository
+fi
+
+if [ ! "$(ls -A /var/spool/icinga2)" ]; then
+mkdir -p /var/spool/icinga2/perfdata
+mkdir -p /var/spool/icinga2/tmp
+fi
+
+chown -R nagios:nagios /var/lib/icinga2
+chown -R nagios:nagios /var/spool/icinga2
+chown -R nagios:nagios /var/cache/icinga2
+
+chown -R nagios:root /etc/icinga2
+
 #If we didn't find us in mysql, connect to MariaDB container and setup the DB
 if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then
 mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
@@ -44,21 +70,6 @@ cp -R /etc/icinga2.dist/* /etc/icinga2/
 cp -R /usr/lib/nagios/plugins.dist/* /usr/lib/nagios/plugins/
 
 
-# chown directories and files that might be coming from volumes
-mkdir -p /var/log/icinga2/compat/archives
-chown -R nagios:adm /var/log/icinga2
-
-mkdir -p /var/lib/icinga2/api/zones
-mkdir -p /var/lib/icinga2/api/log
-mkdir -p /var/lib/icinga2/api/repository
-mkdir -p /var/spool/icinga2/perfdata
-mkdir -p /var/spool/icinga2/tmp
-
-chown -R nagios:nagios /var/lib/icinga2
-chown -R nagios:nagios /var/spool/icinga2
-chown -R nagios:nagios /var/cache/icinga2
-
-chown -R nagios:root /etc/icinga2
 
 #master or satellite? Ask TYPE
 echo "Ok, I am going to setup icinga2 in ${TYPE} mode"
