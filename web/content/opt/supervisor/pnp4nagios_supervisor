@@ -6,4 +6,4 @@ service rrdcached start
 # Allow any signal which would kill a process to stop server
 trap "service npcd stop" HUP INT QUIT ABRT ALRM TERM TSTP
 
-while pgrep -u icinga2 npcd > /dev/null; do sleep 5; done
+while pgrep -u nagios npcd > /dev/null; do sleep 5; done

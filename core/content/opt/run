@@ -25,11 +25,11 @@ mkdir -p /var/spool/icinga2/perfdata
 mkdir -p /var/spool/icinga2/tmp
 fi
 
-#chown -R icinga2:icinga2 /var/lib/icinga2
-chown -R icinga2:icinga2 /var/spool/icinga2
-chown -R icinga2:icinga2 /var/cache/icinga2
+chown -R nagios:nagios /var/lib/icinga2
+chown -R nagios:nagios /var/spool/icinga2
+chown -R nagios:nagios /var/cache/icinga2
 
-chown -R icinga2:root /etc/icinga2
+chown -R nagios:root /etc/icinga2
 
 #If we didn't find us in mysql, connect to MariaDB container and setup the DB
 if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then

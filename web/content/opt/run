@@ -62,13 +62,13 @@ fi
 #Check whether rrdcached cache exists... (sorry for the wordplay)
 if [ ! -d "/var/cache/rrdcached" ]; then
 	mkdir -p /var/cache/rrdcached
-	chown icinga2: /var/cache/rrdcached
+	chown nagios: /var/cache/rrdcached
 fi
 
 #Ensures that pnp4nagios have icinga2 privileges
 
-chown -R icinga2:icinga2 /var/lib/pnp4nagios
-chown -R icinga2:icinga2 /var/log/pnp4nagios
+chown -R nagios:nagios /var/lib/pnp4nagios
+chown -R nagios:nagios /var/log/pnp4nagios
 
 ntpd -gq
 service ntp start

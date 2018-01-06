@@ -42,11 +42,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-#Add the icinga2 user
-RUN groupadd --gid 9001 icinga2
-
-RUN useradd -s /bin/false --gid 9001 --uid 9001 -M icinga2
-
+#Modify nagios uid to be consistent across containers
+RUN usermod -u 9001 nagios && groupmod -g 9001 nagios
 
 #Second apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
