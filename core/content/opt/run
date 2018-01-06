@@ -104,11 +104,6 @@ object IdoMysqlConnection "ido-mysql" {
 }
 END
 
-#ensure that Icinga2 runs as icinga2/icinga2
-
-sed -i 's/nagios/icinga2/' /etc/icinga2/init.conf
-
-
 fi
 
 
