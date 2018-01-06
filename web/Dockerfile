@@ -74,7 +74,7 @@ RUN mkdir -p /usr/share/icingaweb2/modules/pnp \
 
 #Set permissions
 RUN usermod -aG icingaweb2 www-data \
-&& usermod -aG icinga2 www-data
+&& usermod -aG nagios www-data
 
 RUN mv /etc/icingaweb2 /etc/icingaweb2.dist
  
