@@ -12,7 +12,7 @@ if [ ! "$(ls -A /var/log/icinga2)" ]; then
 mkdir -p /var/log/icinga2/compat/archives
 fi
 
-chown -R nagios:adm /var/log/icinga2
+chown -R icinga2:adm /var/log/icinga2
 
 if [ ! "$(ls -A /var/lib/icinga2)" ]; then
 mkdir -p /var/lib/icinga2/api/zones
@@ -25,11 +25,11 @@ mkdir -p /var/spool/icinga2/perfdata
 mkdir -p /var/spool/icinga2/tmp
 fi
 
-chown -R nagios:nagios /var/lib/icinga2
-chown -R nagios:nagios /var/spool/icinga2
-chown -R nagios:nagios /var/cache/icinga2
+chown -R icinga2:icinga2 /var/lib/icinga2
+chown -R icinga2:icinga2 /var/spool/icinga2
+chown -R icinga2:icinga2 /var/cache/icinga2
 
-chown -R nagios:root /etc/icinga2
+chown -R icinga2:root /etc/icinga2
 
 #If we didn't find us in mysql, connect to MariaDB container and setup the DB
 if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then
@@ -85,7 +85,7 @@ if [ ${TYPE} = "master" ]; then
 
 fi
 
-chfn -f "${ICINGA2_USER_FULLNAME}" nagios
+chfn -f "${ICINGA2_USER_FULLNAME}" icinga2
 
 # IDO MySQL
 cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
@@ -103,6 +103,12 @@ object IdoMysqlConnection "ido-mysql" {
   database = "icinga2idomysql"
 }
 END
+
+#ensure that Icinga2 runs as icinga2/icinga2
+
+sed -i 's/nagios/icinga2/' /etc/icinga2/init.conf
+
+
 fi
 
 
@@ -110,6 +116,7 @@ fi
 /opt/setup/ssmtp
 
 #START ICINGA2
+
 echo "Starting Icinga2 (${TYPE} mode)"
 
 icinga2 daemon --validate

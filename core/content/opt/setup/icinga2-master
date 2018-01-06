@@ -7,7 +7,7 @@ icinga2 feature enable ido-mysql livestatus perfdata notification command
 #icinga2 API cert - regenerate new private key and certificate when running in a new container
 	#Make sure the directories exist
 	mkdir -p /var/lib/icinga2/certs
-	chown -R nagios:nagios /var/lib/icinga2/certs
+	chown -R icinga2:icinga2 /var/lib/icinga2/certs
 	#Create and self-sign a master certificate
 	icinga2 node setup --master --cn $(hostname)	
 	#Write zone file

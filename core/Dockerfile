@@ -53,12 +53,17 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
+#Add the icinga2 user
+RUN groupadd --gid 9001 icinga2
+
+RUN useradd -s /bin/false --gid 9001 --uid 9001 -M icinga2
+
 ADD content/ /
 
 # Final fixes
 RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
     && mv /etc/icinga2/ /etc/icinga2.dist \
-    && usermod -aG nagios www-data \
+    && usermod -aG icinga2 www-data \
     && chmod u+s,g+s \
         /bin/ping \
         /bin/ping6 \

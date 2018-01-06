@@ -42,6 +42,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
+#Add the icinga2 user
+RUN groupadd --gid 9001 icinga2
+
+RUN useradd -s /bin/false --gid 9001 --uid 9001 -M icinga2
+
+
 #Second apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
      && wget --quiet -O - https://packages.icinga.org/icinga.key \
@@ -71,7 +77,7 @@ RUN mkdir -p /usr/share/icingaweb2/modules/pnp \
 
 #Set permissions
 RUN usermod -aG icingaweb2 www-data \
-&& usermod -aG nagios www-data
+&& usermod -aG icinga2 www-data
 
 RUN mv /etc/icingaweb2 /etc/icingaweb2.dist
  
