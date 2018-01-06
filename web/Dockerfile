@@ -42,9 +42,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-#Modify nagios uid to be consistent across containers
-RUN usermod -u 9001 nagios && groupmod -g 9001 nagios
-
 #Second apt-get batch
 RUN export DEBIAN_FRONTEND=noninteractive \
      && wget --quiet -O - https://packages.icinga.org/icinga.key \
@@ -64,6 +61,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           pnp4nagios-web \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
+
+#Modify nagios uid to be consistent across containers
+RUN usermod -u 9001 nagios && groupmod -g 9001 nagios
 
 ADD content/ /
 
