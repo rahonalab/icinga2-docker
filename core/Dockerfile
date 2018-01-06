@@ -61,7 +61,7 @@ ADD content/ /
 # Final fixes
 RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
     && mv /etc/icinga2/ /etc/icinga2.dist \
-    && usermod -aG icinga2 www-data \
+    && usermod -aG nagios www-data \
     && chmod u+s,g+s \
         /bin/ping \
         /bin/ping6 \
