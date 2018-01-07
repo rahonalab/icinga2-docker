@@ -11,6 +11,6 @@ echo AuthPass=${SMTP_PASS} >> /etc/ssmtp/ssmtp.conf
 echo UseSTARTTLS=${SMTP_USE_STARTTLS} >> /etc/ssmtp/ssmtp.conf
 echo FromLineOverride=${SMTP_FROM_OVERRIDE} >> /etc/ssmtp/ssmtp.conf
 
-echo ${SMTP_REVALIASES} > /etc/ssmtp/revaliases
+echo root:${SMTP_USER}:${SMTP_MAILHOST}:${SMTP_PORT} > /etc/ssmtp/revaliases
 
 echo "Ssmtp succesfully started with ${SMTP_MAILHOST}:${SMTP_PORT}"
