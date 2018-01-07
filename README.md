@@ -58,9 +58,9 @@ or:
 
 to remove all the containers.
 
-## Volume Reference
+## Persistent volume
 
-Directives in docker-compose.yaml create a series of directories in the ${FIRSTNAME}/ directory located into icinga2-docker directory; this ensures the portability of configuration and data through different versions of containers.
+Directives in docker-compose.yaml create a series of named volumes, which are referred as directories in ${FIRSTNAME}/ (see below for variable reference); this ensures the portability of configuration and data through different versions of containers.
 
 In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or just parts of it) before running new containers.
 
@@ -79,7 +79,33 @@ In order to work in a full clean environment, just remove the ${FIRSTNAME}/ (or 
 | ./${FIRSTNAME}-container/lib/php5/sessions | web:/var/lib/php5/sessions | php5 session files |
 | ./${FIRSTNAME}-container/log/apache2 | web:/var/log/apache2 | Log dir for Apache2 |
 | ./${FIRSTNAME}-container/certs| web:/etc/apache2/ssl:ro | Certs dir for Apache2 SSL (currently not implemented) |
+| ./${FIRSTNAME}-container/perfdata| web:/var/lib/pnp4nagios/perfdata | Perfdata processed by pnp4nagios |
 | ./${FIRSTNAME}-container/mibs| snmptrap:/mibs | Put new mibs and snmptt.conf here |
+
+## Environment variables
+The following two files are used to store variables:
+
+	1. 
+	- .env
+	- secrets.env
+
+The .env file is read by the docker-compose and contains the two variables:
+ 
+| FIRSTNAME | name of your host |
+| DOMAINNAME | name of your domain |
+
+which, along with the $TYPE and core|snmptrap|sql|web variables, builds up the fully-qualified hostname of your container e.g., icinga2-satellite-1-core
+
+The secrets.env is ready by containers and contains the variables employed to configure services:
+
+| Variable | Container | Description |
+| LOCALTIME | all | localtime e.g., Asia/Kabul |
+| TYPE | core, web | type of Icinga2 container: satellite or master |
+| MYSQL\_ROOT\_PASSWORD | sql, core, web | mariadb root password |
+| ICINGA\_PASSWORD | sql, core | mariadb icinga2 password |
+| ICINGAWEB2\_PASSWORD | sql, web | mariadb icingaweb2 password |
+
+
 
 ## Update an existing system
 If you already have a working Icinga2 system, just copy your config (/etc/icinga2) and certificate (/var/lib/icinga2/certs or /etc/icinga2/pki for icinga < 2.8) files in the directories listed above. The setup will automatically detect the presence of certificate files in /var/lib/icinga2/certs and will skip the configuration process.
@@ -88,7 +114,7 @@ If you already have a working Icinga2 system, just copy your config (/etc/icinga
 
 Icinga Web 2 can be accessed at [http://localhost/icingaweb2](http://localhost/icingaweb2) with the credentials set in secrets.env
 
-# Sending Notification Mails
+## Sending Notification Mails
 
 The core container has `ssmtp` installed, which forwards mails to a preconfigured static server.
 
@@ -132,6 +158,4 @@ It will send an e-Mail to `$address` and give verbose log and all error-messages
 
 To use your own modules, you're able to install these into `enabledModules`-folder of your `/etc/icingaweb2` volume.
 
-## Environment variables Reference
 
-TODO
