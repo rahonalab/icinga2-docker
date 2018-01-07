@@ -90,7 +90,9 @@ The following two files are used to store variables:
 	- secrets.env
 
 The .env file is read by the docker-compose and contains the two variables:
- 
+
+| Variable | Description & Usage |
+| ------ |------------------- |
 | FIRSTNAME | name of your host |
 | DOMAINNAME | name of your domain |
 
@@ -99,6 +101,7 @@ which, along with the $TYPE and core|snmptrap|sql|web variables, builds up the f
 The secrets.env is ready by containers and contains the variables employed to configure services:
 
 | Variable | Container | Description |
+| -------- |-----------|-------------|
 | LOCALTIME | all | localtime e.g., Asia/Kabul |
 | TYPE | core, web | type of Icinga2 container: satellite or master |
 | MYSQL\_ROOT\_PASSWORD | sql, core, web | mariadb root password |
