@@ -14,7 +14,7 @@ icinga2 feature enable ido-mysql livestatus perfdata command
 	#Save certificate
 	icinga2 pki save-cert \
         --trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt \
-        --host ${ICINGA2_MASTER}
+        --host ${ICINGA2_MASTER_IP}
 	
 	#Finalize setup with the pre-generated ticket
 	icinga2 node setup --ticket ${ICINGA2_TICKET} --cn $(hostname) --endpoint ${ICINGA2_MASTER} --zone ${ICINGA2_ZONE} --master_host ${ICINGA2_MASTER} --trustedcert /var/lib/icinga2/certs/${ICINGA2_MASTER}-trusted-master.crt --accept-commands --accept-config
