@@ -85,7 +85,7 @@ if [ ${TYPE} = "master" ]; then
 
 fi
 
-chfn -f "${ICINGA2_USER_FULLNAME}" icinga2
+chfn -f "${ICINGA2_USER_FULLNAME}" nagios
 
 # IDO MySQL
 cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
