@@ -24,6 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           net-tools \
           ntp       \
           procps \
+          python-pywbem \
           python \
           python-dev \
           pwgen \

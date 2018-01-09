@@ -47,6 +47,7 @@ services:
      - ./${FIRSTNAME}-container/log/apache2:/var/log/apache2
      - ./${FIRSTNAME}-container/certs:/etc/apache2/ssl:ro
      - ./${FIRSTNAME}-container/perfdata:/var/lib/pnp4nagios/perfdata
+     - ./${FIRSTNAME}-container/etc/pnp4nagios:/etc/pnp4nagios
    volumes_from:
      - core
      - sql
