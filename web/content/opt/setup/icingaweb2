@@ -96,11 +96,8 @@ END
 cat >> /etc/icingaweb2/modules/monitoring/commandtransports.ini <<-END
 
 [icinga2]
-transport = "api"
-host = "core"
-port = "5665"
-username = "api"
-password = "api"
+transport           = "local"
+path                = "/var/run/icinga2/cmd/icinga2.cmd"
 
 END
 

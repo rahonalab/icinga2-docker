@@ -106,9 +106,11 @@ END
 
 fi
 
-
-#CONFIG SSMTP at every boot
+#ssmtp factory defaults
+if [ ! -f "/etc/ssmtp/ssmtp.conf" ]; then
 /opt/setup/ssmtp
+fi
+
 
 #START ICINGA2
 

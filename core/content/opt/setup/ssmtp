@@ -1,16 +1,32 @@
 #!/bin/bash
-#ssmtp configuration // contains code from https://github.com/zalari/docker-wordpress-apache
+#ssmtp configuration 
 
-#overwrite the ssmtp-conf
+cat > /etc/ssmtp/ssmtp.conf <<-END
+# The user that gets all the mails (UID < 1000, usually the admin)
+root=username@rahona.be
 
-rm -f /etc/ssmtp/ssmtp.conf
-echo root=${SMTP_ROOT} >> /etc/ssmtp/ssmtp.conf
-echo mailhub=${SMTP_MAILHOST}:${SMTP_PORT} >> /etc/ssmtp/ssmtp.conf
-echo AuthUser=${SMTP_USER} >> /etc/ssmtp/ssmtp.conf
-echo AuthPass=${SMTP_PASS} >> /etc/ssmtp/ssmtp.conf
-echo UseSTARTTLS=${SMTP_USE_STARTTLS} >> /etc/ssmtp/ssmtp.conf
-echo FromLineOverride=${SMTP_FROM_OVERRIDE} >> /etc/ssmtp/ssmtp.conf
+# The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
+mailhub=mail.rahona.be:587
 
-echo root:${SMTP_USER}:${SMTP_MAILHOST}:${SMTP_PORT} > /etc/ssmtp/revaliases
+# The address where the mail appears to come from for user authentication.
+rewriteDomain=rahona.be
 
-echo "Ssmtp succesfully started with ${SMTP_MAILHOST}:${SMTP_PORT}"
+# The full hostname.  Must be correctly formed, fully qualified domain name or the server will reject connection.
+hostname=yourlocalhost.yourlocaldomain.tld
+
+# Use SSL/TLS before starting negotiation
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# Username/Password
+AuthUser=username
+AuthPass=password
+AuthMethod=LOGIN
+
+# Email 'From header's can override the default domain?
+FromLineOverride=yes
+END
+
+cat > /etc/ssmtp/revaliases.conf <<-END
+root:username@rahona.be:smtp.rahona.be:587
+END

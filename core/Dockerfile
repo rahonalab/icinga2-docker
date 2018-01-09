@@ -16,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  curl \
           gcc  \
 	  gnupg2 \
+          liblist-compare-perl \
           mailutils \
           mysql-client \
 	  nagios-plugins-contrib \
