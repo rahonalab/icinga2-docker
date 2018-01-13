@@ -17,10 +17,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           gcc  \
 	  gnupg2 \
           liblist-compare-perl \
+	  libclass-dbi-mysql-perl \
+          libdbd-sybase-perl \
           mailutils \
           mysql-client \
 	  nagios-plugins-contrib \
           nagios-snmp-plugins \
+          nagios-nrpe-plugin \
           net-tools \
           ntp       \
           procps \
