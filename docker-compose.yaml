@@ -43,6 +43,7 @@ services:
      - 80:80
    volumes:
      - ./${FIRSTNAME}-container/etc/icingaweb2:/etc/icingaweb2
+     - ./${FIRSTNAME}-container/webroot_icingaweb2:/usr/share/icingaweb2
      - ./${FIRSTNAME}-container/lib/php5/sessions:/var/lib/php5/sessions
      - ./${FIRSTNAME}-container/log/apache2:/var/log/apache2
      - ./${FIRSTNAME}-container/certs:/etc/apache2/ssl:ro

@@ -3,6 +3,8 @@ echo "Starting text-files configuration..."
 
 cp -rvp /etc/icingaweb2.dist/* /etc/icingaweb2/
 
+cp -rvp /usr/share/icingaweb2.dist/* /usr/share/icingaweb2/
+
 # chown directories and files that might be coming from volumes
 
 icingacli setup config directory
@@ -13,6 +15,7 @@ chown -R www-data:adm /var/log/icingaweb2
 mkdir -p /var/lib/php5/sessions
 chown -R www-data:www-data /var/lib/php5/sessions
 
+chown -R www-data: /usr/share/icingaweb2
 #Setting icingaweb2 ini
 cat >> /etc/icingaweb2/authentication.ini <<-END
 
