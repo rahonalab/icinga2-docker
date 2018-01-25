@@ -29,7 +29,11 @@ chown -R nagios:nagios /var/lib/icinga2
 chown -R nagios:nagios /var/spool/icinga2
 chown -R nagios:nagios /var/cache/icinga2
 
+
 chown -R nagios:root /etc/icinga2
+
+chown -R nagios:root /var/lib/contrib-plugins
+
 
 #If we didn't find us in mysql, connect to MariaDB container and setup the DB
 if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then
@@ -67,7 +71,6 @@ if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
 echo "=> Ok, new installation. I will run some scripts"
 echo "=> Copying fresh config-files for /etc/icinga2"
 cp -R /etc/icinga2.dist/* /etc/icinga2/
-cp -R /usr/lib/nagios/plugins.dist/* /usr/lib/nagios/plugins/
 
 
 

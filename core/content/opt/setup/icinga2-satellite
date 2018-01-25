@@ -2,6 +2,8 @@
 
 #We are on a satellite setup, so do not include conf.d
 sed -i 's/include_recursive "conf.d"/#include_recursive "conf.d"/' /etc/icinga2/icinga2.conf
+#Set the PluginContribDir to /var/lib/contrib-plugins
+sed -i 's/PluginContribDir = "\/usr\/lib\/nagios\/plugins"/PluginContribDir = "\/usr\/lib\/contrib-plugins"/' /etc/icinga2/constants.conf
 
 
 # enable necessary features
