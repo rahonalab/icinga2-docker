@@ -70,7 +70,6 @@ RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
     && chmod u+s,g+s \
         /bin/ping \
         /bin/ping6 \
-        /usr/lib/nagios/plugins/check_icmp \
-    && mv /usr/lib/nagios/plugins /usr/lib/nagios/plugins.dist
+        /usr/lib/nagios/plugins/check_icmp
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]
