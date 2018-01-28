@@ -32,6 +32,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           python \
           python-dev \
           pwgen \
+	  rsync \
           snmp \
           libsnmp-base \
           tcpdump \
@@ -72,11 +73,32 @@ RUN mkdir -p /usr/share/icingaweb2/modules/pnp \
     && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-pnp/archive/master.tar.gz" \
     | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/pnp -f - icingaweb2-module-pnp-master/
 
-#Set permissions
-RUN usermod -aG icingaweb2 www-data \
-&& usermod -aG nagios www-data
+#Get NAGVIS
+RUN mkdir -p /tmp/nagvis \
+    && wget -q --no-cookies -O - "https://github.com/nagvis/nagvis/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/tmp/nagvis -f - nagvis-master/ \
+    && cd /tmp/nagvis \
+    && ./install.sh -u www-data -g www-data -w /etc/apache2/sites-available -a y -q -F
 
-RUN mv /etc/icingaweb2 /etc/icingaweb2.dist && mv /etc/pnp4nagios /etc/pnp4nagios.dist && mv /usr/share/icingaweb2 /usr/share/icingaweb2.dist
+#Get NAGVIS module
+RUN mkdir -p /usr/share/icingaweb2/modules/nagvis \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-nagvis/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/nagvis -f - icingaweb2-module-nagvis-master/
+
+#Get cube module
+RUN mkdir -p /usr/share/icingaweb2/modules/cube \
+    && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-cube/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/cube -f - icingaweb2-module-cube-master/
+
+#Get map module
+RUN mkdir -p /usr/share/icingaweb2/modules/map \
+    && wget -q --no-cookies -O - "https://github.com/nbuchwitz/icingaweb2-module-map/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/map -f - icingaweb2-module-map-master/
+
+#Final fixes
+RUN usermod -aG icingaweb2 www-data \
+&& usermod -aG nagios www-data \
+&& mv /etc/icingaweb2 /etc/icingaweb2.dist && mv /etc/pnp4nagios /etc/pnp4nagios.dist && mv /usr/share/icingaweb2 /usr/share/icingaweb2.dist && mv /usr/local/nagvis /usr/local/nagvis.dist
  
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]

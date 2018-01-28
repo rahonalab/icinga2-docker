@@ -7,7 +7,6 @@ cp -rvp /usr/share/icingaweb2.dist/* /usr/share/icingaweb2/
 
 # chown directories and files that might be coming from volumes
 
-icingacli setup config directory
 
 mkdir -p /var/log/icingaweb2
 chown -R www-data:adm /var/log/icingaweb2
@@ -111,10 +110,21 @@ protected_customvars = "*pw*,*pass*,community"
 
 END
 
+#cookie in config.ini
+cat >> /etc/icingaweb2/config.ini <<-END
+
+[cookie]
+path = /
+
+END
+
+
 # enable modules
 icingacli module enable monitoring
 icingacli module enable doc
 icingacli module enable pnp
+icingacli module enable cube
+icingacli module enable map
 
 #commit ourselves
 touch /etc/icingaweb2/CONFIGURED

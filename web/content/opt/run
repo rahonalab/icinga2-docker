@@ -54,10 +54,18 @@ if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
 
 fi
 
+#If we cannot find nagvis conf, run conf script
+if [ ! -f "/usr/local/nagvis/etc/nagvis.ini.php" ]; then
+
+/opt/setup/nagvis
+
+fi
+
 #If we cannot find pnp4nagios, copy the configuration back
 if [ ! -f "/etc/pnp4nagios/npcd.cfg" ]; then
 cp -rvp /etc/pnp4nagios.dist/* /etc/pnp4nagios/
 fi
+
 
 #Remove staled pids
 if [ -f "/var/run/rrdcached.pid" ]; then
