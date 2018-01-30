@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "Starting text-files configuration..."
 
-icingacli setup config directory
 
 cp -rvp /etc/icingaweb2.dist/* /etc/icingaweb2/
 
 cp -rvp /usr/share/icingaweb2.dist/* /usr/share/icingaweb2/
 
+icingacli setup config directory
 # chown directories and files that might be coming from volumes
 
 
