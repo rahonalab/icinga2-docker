@@ -7,6 +7,14 @@ echo "Time set to ${LOCALTIME}"
 
 ##Config: we separate db config from file config
 
+##File config
+#If we cannot find magic file, create the configuration
+if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
+	
+/opt/setup/icingaweb2
+
+fi
+
 ##DB config
 echo "Starting DB configuration..."
 #If we cannot find our directory in mysql, connect to the DB
@@ -44,13 +52,6 @@ Icinga Web 2 (/icingaweb2) default credentials: ${ICINGAWEB2_ADMIN_USER}:${ICING
 ===================================================================
 
 END
-
-fi
-##File config
-#If we cannot find magic file, create the configuration
-if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
-	
-/opt/setup/icingaweb2
 
 fi
 
