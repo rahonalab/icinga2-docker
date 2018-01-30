@@ -32,7 +32,7 @@ chown -R nagios:nagios /var/cache/icinga2
 
 chown -R nagios:root /etc/icinga2
 
-chown -R nagios:root /var/lib/contrib-plugins
+chown -R nagios:root /usr/lib/contrib-plugins
 
 
 #If we didn't find us in mysql, connect to MariaDB container and setup the DB
