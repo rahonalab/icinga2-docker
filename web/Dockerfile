@@ -18,6 +18,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  curl \
           gcc  \
 	  gnupg2 \
+	  graphviz \
           mysql-client \
           net-tools \
           ntp       \
@@ -28,6 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           php5-curl \
           php5-ldap \
 	  php5-mysql \
+	  php5-sqlite3 \
           procps \
           python \
           python-dev \
