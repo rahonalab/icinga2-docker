@@ -65,9 +65,6 @@ require_once EmbeddedWeb::start('/usr/share/icingaweb2', '/etc/icingaweb2')\n
     ->getLibDir() . '/nagvis-includes/init.inc.php';" '/new CoreSessionHandler\(\);/{print; print var; next }1' /usr/local/nagvis/share/server/core/functions/index.php > index.php
 mv index.php /usr/local/nagvis/share/server/core/functions/
 
-#enable nagvis site
-a2ensite nagvis
-
 # enable nagvis modules
 icingacli module enable nagvis
 

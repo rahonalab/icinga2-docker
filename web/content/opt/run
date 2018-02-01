@@ -62,6 +62,12 @@ if [ ! -f "/usr/local/nagvis/etc/nagvis.ini.php" ]; then
 
 fi
 
+#Ensure that nagvis site is enabled
+if [ -f "/etc/apache2/sites-enabled/nagvis.conf" ]
+a2ensite nagvis
+fi
+
+
 #If we cannot find pnp4nagios, copy the configuration back
 if [ ! -f "/etc/pnp4nagios/npcd.cfg" ]; then
 cp -rvp /etc/pnp4nagios.dist/* /etc/pnp4nagios/
