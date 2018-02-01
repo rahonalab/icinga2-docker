@@ -63,7 +63,7 @@ if [ ! -f "/usr/local/nagvis/etc/nagvis.ini.php" ]; then
 fi
 
 #Ensure that nagvis site is enabled
-if [ -f "/etc/apache2/sites-enabled/nagvis.conf" ]; then
+if [ ! -f "/etc/apache2/sites-enabled/nagvis.conf" ]; then
 a2ensite nagvis
 service apache2 reload
 fi
