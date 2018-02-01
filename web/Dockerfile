@@ -29,7 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           php5-curl \
           php5-ldap \
 	  php5-mysql \
-	  php5-sqlite3 \
+	  php5-sqlite \
           procps \
           python \
           python-dev \
