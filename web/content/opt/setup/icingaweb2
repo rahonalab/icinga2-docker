@@ -49,7 +49,7 @@ port = "3306"
 dbname = "icinga2idomysql"
 username = "icinga2idomysql"
 password = "${ICINGA_PASSWORD}"
-charset = "utf8"
+charset = "latin1"
 persistent = "0"
 END
 

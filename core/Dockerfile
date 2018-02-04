@@ -19,6 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           liblist-compare-perl \
 	  libclass-dbi-mysql-perl \
           libdbd-sybase-perl \
+	  logrotate \
           mailutils \
           mysql-client \
 	  nagios-plugins-contrib \

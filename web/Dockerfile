@@ -19,6 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           gcc  \
 	  gnupg2 \
 	  graphviz \
+          logrotate \
           mysql-client \
           net-tools \
           ntp       \

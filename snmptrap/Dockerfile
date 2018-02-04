@@ -15,6 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           procps   \
           net-tools \
           ntp       \
+	  logrotate \
           python \
           python-dev \
           pwgen \
