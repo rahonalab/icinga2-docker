@@ -86,6 +86,9 @@ if [ ! -d "/var/cache/rrdcached" ]; then
 	chown nagios: /var/cache/rrdcached
 fi
 
+#Ensures that icingaweb2 have www-data: privileges
+chown -R www-data: /etc/icingaweb2
+
 #Ensures that pnp4nagios have icinga2 privileges
 
 chown -R nagios:nagios /var/lib/pnp4nagios
