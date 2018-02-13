@@ -16,9 +16,9 @@ if [ ! -f "/etc/icingaweb2/CONFIGURED" ]; then
 fi
 
 ##DB config
-echo "Starting DB configuration..."
 #If we cannot find our directory in mysql, connect to the DB
 if [ ! -d "/var/lib/mysql/icingaweb2" ]; then
+echo "Starting DB configuration..."
 #Hash the icingaweb2 admin pass
 export ICINGAWEB2_ADMIN_PASS_HASH=$(openssl passwd -1 "${ICINGAWEB2_ADMIN_PASS}")
 #set $mysql alias
