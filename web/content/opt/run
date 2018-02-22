@@ -94,7 +94,11 @@ chown -R www-data: /etc/icingaweb2
 chown -R nagios:nagios /var/lib/pnp4nagios
 chown -R nagios:nagios /var/log/pnp4nagios
 
+#Check for an available internet connection
+if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
 ntpd -gq
+fi
+
 service ntp start
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &

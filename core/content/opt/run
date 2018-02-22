@@ -121,8 +121,13 @@ echo "Starting Icinga2 (${TYPE} mode)"
 
 icinga2 daemon --validate
 
+#Check for an available internet connection
+if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
 ntpd -gq
+fi
+
 service ntp start
+
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
 trap "supervisorctl shutdown && wait" SIGTERM

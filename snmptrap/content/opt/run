@@ -18,7 +18,11 @@ fi
 
 echo "Starting Supervisor."
 
+#Check for an available internet connection
+if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
 ntpd -gq
+fi
+
 service ntp start
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
