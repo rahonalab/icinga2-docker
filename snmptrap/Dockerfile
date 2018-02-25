@@ -18,6 +18,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  logrotate \
           python \
           python-dev \
+          iputils-ping \
           pwgen \
           snmp \
           snmptrapd \
