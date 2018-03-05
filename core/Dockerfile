@@ -20,12 +20,14 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  libclass-dbi-mysql-perl \
           libdbd-sybase-perl \
 	  libmonitoring-plugin-perl \
+	  liblwp-protocol-https-perl \
 	  logrotate \
           mailutils \
           mysql-client \
 	  nagios-plugins-contrib \
           nagios-snmp-plugins \
           nagios-nrpe-plugin \
+	  smbclient \
           net-tools \
           ntp       \
           procps \
