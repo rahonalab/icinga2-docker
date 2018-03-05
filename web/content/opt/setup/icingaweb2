@@ -128,6 +128,7 @@ icingacli module enable pnp
 icingacli module enable cube
 icingacli module enable map
 icingacli module enable nagvis
+icingacli module enable company
 
 #commit ourselves
 touch /etc/icingaweb2/CONFIGURED

@@ -98,6 +98,11 @@ RUN mkdir -p /usr/share/icingaweb2/modules/map \
     && wget -q --no-cookies -O - "https://github.com/nbuchwitz/icingaweb2-module-map/archive/master.tar.gz" \
     | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/map -f - icingaweb2-module-map-master/
 
+#Get company module
+RUN mkdir -p /usr/share/icingaweb2/modules/company \
+    && wget -q --no-cookies -O - "https://github.com/rahonalab/icingaweb2-theme-company/archive/master.tar.gz" \
+    | tar vxz --strip-components=1 --directory=/usr/share/icingaweb2/modules/company -f - icingaweb2-theme-company-master/
+
 #Final fixes
 RUN usermod -aG icingaweb2 www-data \
 && usermod -aG nagios www-data \
