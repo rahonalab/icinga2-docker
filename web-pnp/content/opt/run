@@ -72,6 +72,8 @@ fi
 #If we cannot find pnp4nagios, copy the configuration back
 if [ ! -f "/etc/pnp4nagios/npcd.cfg" ]; then
 cp -rvp /etc/pnp4nagios.dist/* /etc/pnp4nagios/
+chown -R nagios:nagios /var/log/pnp4nagios
+chown -R nagios:nagios /var/lib/pnp4nagios
 fi
 
 #Remove staled pids

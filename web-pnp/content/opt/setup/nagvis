@@ -1,0 +1,70 @@
+#!/bin/bash
+#Strictly following https://github.com/Icinga/icingaweb2-module-nagvis/blob/master/README.md
+echo "Starting nagvis configuration..."
+# chown directories and files that might be coming from volumes
+chown -R www-data:www-data /usr/local/nagvis
+cp -rvp /usr/local/nagvis.dist/* /usr/local/nagvis/
+
+#Overwrite shipped configuration
+#Setting nagvis ini
+cat > /usr/local/nagvis/etc/nagvis.ini.php  <<-END
+
+[global]
+authmodule="CoreAuthModIcingaweb2"
+authorisationmodule="CoreAuthorisationModIcingaweb2"
+logonmodule="LogonIcingaweb2"
+
+[paths]
+htmlcgi="/icingaweb2"
+
+[defaults]
+backend="idomysql_1"
+
+urltarget="_top"
+hosturl="[htmlcgi]/monitoring/host/show?host=[host_name]"
+hostgroupurl="[htmlcgi]/monitoring/list/hostgroups?hostgroup_name=[hostgroup_name]"
+serviceurl="[htmlcgi]/monitoring/service/show?host=[host_name]&service=[service_description]"
+servicegroupurl="[htmlcgi]/monitoring/list/servicegroups?servicegroup_name=[servicegroup_name]"
+mapurl="[htmlcgi]/nagvis/show/map?map=[map_name]"
+headermenu=0
+stylesheet="icingaweb-nagvis-integration.css"
+
+backgroundcolor="#850009"
+[backend_livestatus]
+backendtype="mklivestatus"
+socket="unix:/var/run/icinga2/cmd/livestatus"
+timeout=30
+
+[backend_idomysql_1]
+backendtype="ndomy"
+dbname="icinga2idomysql"
+dbprefix="icinga_"
+dbhost="sql"
+dbport=3306
+dbuser="icinga2idomysql"
+dbpass="${ICINGA_PASSWORD}"
+
+[automap]
+[wui]
+[worker]
+[states]
+
+END
+
+#css integration
+cp -rvp /usr/share/icingaweb2/modules/nagvis/public/css/icingaweb-nagvis-integration.css /usr/local/nagvis/share/userfiles/styles/
+
+
+#Add code to index.php
+
+awk  -v var="use Icinga\Application\EmbeddedWeb;\n
+require_once 'Icinga/Application/EmbeddedWeb.php';\n
+require_once EmbeddedWeb::start('/usr/share/icingaweb2', '/etc/icingaweb2')\n
+    ->getModuleManager()\n
+    ->getModule('nagvis')\n
+    ->getLibDir() . '/nagvis-includes/init.inc.php';" '/new CoreSessionHandler\(\);/{print; print var; next }1' /usr/local/nagvis/share/server/core/functions/index.php > index.php
+mv index.php /usr/local/nagvis/share/server/core/functions/
+
+# enable nagvis modules
+icingacli module enable nagvis
+

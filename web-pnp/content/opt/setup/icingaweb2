@@ -1,0 +1,135 @@
+#!/bin/bash
+echo "Starting text-files configuration..."
+
+
+cp -rvp /etc/icingaweb2.dist/* /etc/icingaweb2/
+
+cp -rvp /usr/share/icingaweb2.dist/* /usr/share/icingaweb2/
+
+icingacli setup config directory
+# chown directories and files that might be coming from volumes
+
+
+mkdir -p /var/log/icingaweb2
+chown -R www-data:adm /var/log/icingaweb2
+
+mkdir -p /var/lib/php5/sessions
+chown -R www-data:www-data /var/lib/php5/sessions
+
+chown -R www-data: /usr/share/icingaweb2
+#Setting icingaweb2 ini
+cat >> /etc/icingaweb2/authentication.ini <<-END
+
+[icingaweb2]
+backend             = "db"
+resource            = "icingaweb2"
+
+END
+
+#Resources
+cat >> /etc/icingaweb2/resources.ini <<-END
+
+[icingaweb2]
+type = "db"
+db = "mysql"
+host = "sql"
+port = "3306"
+dbname = "icingaweb2"
+username = "icingaweb2"
+password = "${ICINGAWEB2_PASSWORD}"
+prefix = "icingaweb_"
+charset = "utf8"
+persistent = "0"
+
+[icinga2]
+type = "db"
+db = "mysql"
+host = "sql"
+port = "3306"
+dbname = "icinga2idomysql"
+username = "icinga2idomysql"
+password = "${ICINGA_PASSWORD}"
+charset = "latin1"
+persistent = "0"
+END
+
+#config.ini
+cat >> /etc/icingaweb2/config.ini <<-END
+
+[global]
+show_stacktraces = "1"
+config_backend = "db"
+config_resource = "icingaweb2"
+
+[logging]
+log = "file"
+level = "ERROR"
+file = "/var/log/icingaweb2/icingaweb2.log"
+
+END
+
+#Icingaweb2 user and password
+cat >> /etc/icingaweb2/roles.ini <<-END
+
+[Administrators]
+users = ${ICINGAWEB2_ADMIN_USER}
+permissions = "*"
+groups = "Administrators"
+
+END
+
+cat >> /etc/icingaweb2/groups.ini <<-END
+
+[icingaweb2]
+backend = "db"
+resource = "icingaweb2"
+
+END
+
+#Monitoring (base) module config
+mkdir -p /etc/icingaweb2/modules/monitoring
+cat >> /etc/icingaweb2/modules/monitoring/backends.ini <<-END
+
+[icinga2]
+type                = "ido"
+resource            = "icinga2"
+
+END
+
+
+cat >> /etc/icingaweb2/modules/monitoring/commandtransports.ini <<-END
+
+[icinga2]
+transport           = "local"
+path                = "/var/run/icinga2/cmd/icinga2.cmd"
+
+END
+
+cat >> /etc/icingaweb2/modules/monitoring/config.ini <<-END
+
+[security]
+protected_customvars = "*pw*,*pass*,community"
+
+END
+
+#cookie in config.ini
+cat >> /etc/icingaweb2/config.ini <<-END
+
+[cookie]
+path = /
+
+END
+
+
+# enable modules
+icingacli module enable monitoring
+icingacli module enable doc
+icingacli module enable pnp
+icingacli module enable cube
+icingacli module enable map
+icingacli module enable nagvis
+icingacli module enable company
+
+#commit ourselves
+touch /etc/icingaweb2/CONFIGURED
+
