@@ -28,6 +28,7 @@ fi
 chown -R nagios:nagios /var/lib/icinga2
 chown -R nagios:nagios /var/spool/icinga2
 chown -R nagios:nagios /var/cache/icinga2
+chown -R nagios:nagios /var/run/icinga2
 
 
 chown -R nagios:root /etc/icinga2
