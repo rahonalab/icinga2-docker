@@ -36,28 +36,33 @@ services:
     hostname: ${FIRSTNAME}-grafana
     volumes:
       - ./${FIRSTNAME}-container/lib/grafana:/var/lib/grafana
-    ports:
-     - 3000:3000
+  influxdb:
+    image: influxdb
+    env_file: ./secrets.env
+    domainname: ${DOMAINNAME}
+    hostname: ${FIRSTNAME}-influxdb
+    volumes:
+      - ./${FIRSTNAME}-container/perfdata:/var/lib/influxdb
   web:
-   image: rahonabe/icinga2-web
-   env_file: ./secrets.env
-   links:
+    image: rahonabe/icinga2-web
+    env_file: ./secrets.env
+    links:
      - sql
      - core
-   domainname: ${DOMAINNAME}
-   hostname: ${FIRSTNAME}-web
-   build: 
-    context: ./web
-   ports:
+    domainname: ${DOMAINNAME}
+    hostname: ${FIRSTNAME}-web
+    build: 
+     context: ./web
+    ports:
      - 80:80
-   volumes:
+    volumes:
      - ./${FIRSTNAME}-container/etc/icingaweb2:/etc/icingaweb2
      - ./${FIRSTNAME}-container/webroot_icingaweb2:/usr/share/icingaweb2
      - ./${FIRSTNAME}-container/webroot_nagvis:/usr/local/nagvis
      - ./${FIRSTNAME}-container/lib/php5/sessions:/var/lib/php5/sessions
      - ./${FIRSTNAME}-container/log/apache2:/var/log/apache2
      - ./${FIRSTNAME}-container/certs:/etc/apache2/ssl:ro
-   volumes_from:
+    volumes_from:
      - core
      - sql
   snmptrap:

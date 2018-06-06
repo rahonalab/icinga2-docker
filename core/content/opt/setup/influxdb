@@ -1,0 +1,37 @@
+#!/bin/bash
+
+	#Enable influxdb writer
+	icinga2 feature enable influxdb
+	
+	#Write influxdb config
+	cat <<EOF > /etc/icinga2/features-enabled/influxdb.conf
+
+library "perfdata"
+	
+object InfluxdbWriter "influxdb" {
+  host = "influxdb"
+  port = 8086
+  database = "${INFLUXDB_DB}"
+  username = "${INFLUXDB_USER}"
+  password = "${INFLUXDB_USER_PASSWORD}"
+  flush_threshold = 1024
+  flush_interval = 10s
+
+  host_template = {
+    measurement = "$host.check_command$"
+    tags = {
+      hostname = "$host.name$"
+    }
+  }
+  service_template = {
+    measurement = "$service.check_command$"
+    tags = {
+      hostname = "$host.name$"
+      service = "$service.name$"
+    }
+  }
+}	
+
+		
+EOF
+

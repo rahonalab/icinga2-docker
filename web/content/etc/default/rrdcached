@@ -1,1 +1,0 @@
-OPTS="-w 1800 -z 1800 -j /var/cache/rrdcached -s 9001 -m 0660 -l unix:/var/run/rrdcached.sock"

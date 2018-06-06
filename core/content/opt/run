@@ -88,6 +88,16 @@ if [ ${TYPE} = "master" ]; then
 
 fi
 
+#pnp or influxdb? Ask PERFDATA
+
+if [ ${PERFDATA} = "influxdb" ]; then
+
+/opt/setup/influxdb
+
+fi
+
+
+
 chfn -f "${ICINGA2_USER_FULLNAME}" nagios
 
 # IDO MySQL

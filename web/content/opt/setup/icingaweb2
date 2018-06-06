@@ -124,7 +124,7 @@ END
 # enable modules
 icingacli module enable monitoring
 icingacli module enable doc
-icingacli module enable pnp
+icingacli module enable graphite
 icingacli module enable cube
 icingacli module enable map
 icingacli module enable nagvis

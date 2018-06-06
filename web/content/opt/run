@@ -69,22 +69,6 @@ service apache2 reload
 fi
 
 
-#If we cannot find pnp4nagios, copy the configuration back
-if [ ! -f "/etc/pnp4nagios/npcd.cfg" ]; then
-cp -rvp /etc/pnp4nagios.dist/* /etc/pnp4nagios/
-fi
-
-#Remove staled pids
-if [ -f "/var/run/rrdcached.pid" ]; then
-	rm /var/run/rrdcached.pid
-fi
-
-#Check whether rrdcached cache exists... (sorry for the wordplay)
-if [ ! -d "/var/cache/rrdcached" ]; then
-	mkdir -p /var/cache/rrdcached
-	chown nagios: /var/cache/rrdcached
-fi
-
 #Ensures that icingaweb2 have www-data: privileges
 chown -R www-data: /etc/icingaweb2
 
