@@ -2,7 +2,7 @@
 #contains code from
 # https://github.com/jjethwa/icinga2
 
-FROM debian:stretch-slim
+FROM debian:jessie-slim
 
 MAINTAINER Luigi - Rahona Labs
 
