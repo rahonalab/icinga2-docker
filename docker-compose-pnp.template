@@ -17,7 +17,7 @@ services:
        - ./${FIRSTNAME}-container/lib/icinga2:/var/lib/icinga2
        - ./${FIRSTNAME}-container/contrib-plugins:/usr/lib/contrib-plugins
        - ./${FIRSTNAME}-container/log/icinga2:/var/log/icinga2
-       - ./${FIRSTNAME}-container/run/icinga2:/var/run/icinga2
+       - ./${FIRSTNAME}-container/run/icinga2:/run/icinga2
        - ./${FIRSTNAME}-container/spool/icinga2:/var/spool/icinga2
        - ./${FIRSTNAME}-container/etc/ssmtp:/etc/ssmtp
      volumes_from:
