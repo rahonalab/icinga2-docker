@@ -25,6 +25,12 @@ mkdir -p /var/spool/icinga2/perfdata
 mkdir -p /var/spool/icinga2/tmp
 fi
 
+if [ ! "$(ls -A /var/run/icinga2/cmd)" ]; then
+mkdir -p /var/run/icinga2/cmd
+fi
+
+
+
 chown -R nagios:nagios /var/lib/icinga2
 chown -R nagios:nagios /var/spool/icinga2
 chown -R nagios:nagios /var/cache/icinga2
