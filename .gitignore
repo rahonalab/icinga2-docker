@@ -2,6 +2,7 @@
 *.swo
 .DS_Store
 icinga2-satellite-*
+icinga2-master-*
 .env
 *.swn
 secrets.env
