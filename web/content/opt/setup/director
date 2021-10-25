@@ -14,12 +14,6 @@ password = "${DIRECTOR_USER_PASSWORD}"
 charset = "utf8"
 END
 
-cat >> /etc/icingaweb2/config.ini <<-END
-
-[db]
-resource = "Director DB"
-END
-
 cat >> /etc/icingaweb2/modules/director/config.ini <<-END
 
 [db]
