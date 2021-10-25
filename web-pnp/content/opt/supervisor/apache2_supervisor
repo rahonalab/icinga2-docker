@@ -1,8 +1,0 @@
-#!/bin/bash
-
-service apache2 start
-
-# Allow any signal which would kill a process to stop server
-trap "service apache2 stop" HUP INT QUIT ABRT ALRM TERM TSTP
-
-while pgrep -u www-data apache2 > /dev/null; do sleep 5; done
