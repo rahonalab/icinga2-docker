@@ -1,0 +1,53 @@
+#!/bin/bash
+
+mkdir -p /etc/icingaweb2/modules/director
+
+cat >> /etc/icingaweb2/resources.ini <<-END
+
+[Director DB]
+type = "db"
+db = "mysql"
+host = "sql"
+dbname = "director"
+username = "director"
+password = "${DIRECTOR_USER_PASSWORD}"
+charset = "utf8"
+END
+
+cat >> /etc/icingaweb2/config.ini <<-END
+
+[db]
+resource = "Director DB"
+END
+
+cat >> /etc/icingaweb2/modules/director/config.ini <<-END
+
+[db]
+resource = "Director DB"
+END
+
+cat >> /etc/icingaweb2/modules/director/kickstart.ini <<-END
+
+[config]
+endpoint = ${DIRECTOR_EP}
+; host = 127.0.0.1
+; port = 5665
+username = ${DIRECTOR_EP_USER}
+password = ${DIRECTOR_EP_USER}
+
+END
+
+# Now finally, we can enable everything
+icingacli module enable director
+icingacli module enable reactbundle
+icingacli module enable ipl
+icingacli module enable incubator
+
+# Add the user to run its daemon
+useradd -r -g icingaweb2 -G www-data -d /var/lib/icingadirector -s /bin/false icingadirector
+install -d -o icingadirector -g icingaweb2 -m 0750 /var/lib/icingadirector
+su - icingadirector -s /bin/bash -c "/usr/bin/icingacli director daemon run" &
+
+# Run the DB schema import
+icingacli director migration run --verbose
+
