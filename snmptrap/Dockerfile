@@ -1,12 +1,12 @@
 # Dockerfile for snmptrap
-#contains code from
+# contains code from
 # https://github.com/jjethwa/icinga2
 
-FROM php:7.2.6-cli-stretch
+FROM php:7.4.25-cli-bullseye
 
 MAINTAINER Luigi - Rahona Labs
 
-RUN echo "deb http://http.debian.net/debian/ stretch main contrib non-free" > /etc/apt/sources.list
+RUN echo "deb http://http.debian.net/debian/ bullseye main contrib non-free" > /etc/apt/sources.list
 
 RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get update \
