@@ -1,64 +1,56 @@
 #!/bin/bash
 
-#Set localtime at every boot
+# Set localtime at every boot
 unlink /etc/localtime
 ln -s /usr/share/zoneinfo/${LOCALTIME} /etc/localtime
 echo "Time set to ${LOCALTIME}"
 
-#Check directories and permissions
+# Check directories and permissions
 # always chown directories and files that might be coming from volumes
-
 if [ ! "$(ls -A /var/log/icinga2)" ]; then
-mkdir -p /var/log/icinga2/compat/archives
+  mkdir -p /var/log/icinga2/compat/archives
 fi
 
 chown -R nagios:adm /var/log/icinga2
 
 if [ ! "$(ls -A /var/lib/icinga2)" ]; then
-mkdir -p /var/lib/icinga2/api/zones
-mkdir -p /var/lib/icinga2/api/log
-mkdir -p /var/lib/icinga2/api/repository
+  mkdir -p /var/lib/icinga2/api/zones
+  mkdir -p /var/lib/icinga2/api/log
+  mkdir -p /var/lib/icinga2/api/repository
 fi
 
 if [ ! "$(ls -A /var/spool/icinga2)" ]; then
-mkdir -p /var/spool/icinga2/perfdata
-mkdir -p /var/spool/icinga2/tmp
+  mkdir -p /var/spool/icinga2/perfdata
+  mkdir -p /var/spool/icinga2/tmp
 fi
 
 if [ ! "$(ls -A /var/run/icinga2/cmd)" ]; then
-mkdir -p /var/run/icinga2/cmd
+  mkdir -p /var/run/icinga2/cmd
 fi
-
-
 
 chown -R nagios:nagios /var/lib/icinga2
 chown -R nagios:nagios /var/spool/icinga2
 chown -R nagios:nagios /var/cache/icinga2
 chown -R nagios:nagios /var/run/icinga2
-
-
-chown -R nagios:root /etc/icinga2
-
 chown -R nagios:root /usr/lib/contrib-plugins
 
-
-#If we didn't find us in mysql, connect to MariaDB container and setup the DB
+# If we didn't find us in mysql, connect to MariaDB container and setup the DB
 if [ ! -d "/var/lib/mysql/icinga2idomysql" ]; then
 mysql="mysql --connect-timeout=10 -h sql -u root -p${MYSQL_ROOT_PASSWORD}"
 
-#Wait until MariaDB container is ready
+# Wait until MariaDB container is ready
 while ! $mysql -e status &> /dev/null; do
     sleep 1s
     echo -n "."
   done
 
-#Create DB and users
+# Create DB and users
 $mysql <<-END
   CREATE DATABASE IF NOT EXISTS icinga2idomysql;
   GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga2idomysql.* TO 'icinga2idomysql'@'%' IDENTIFIED BY '${ICINGA_PASSWORD}';
 END
 
-#Import schemas
+# Import schemas
 $mysql icinga2idomysql < /usr/share/icinga2-ido-mysql/schema/mysql.sql
 
 cat <<-END
@@ -71,41 +63,29 @@ END
 fi
 
 
-#Let's see if we have to run setup
+# Let's see if we have to run setup
 if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
+  # Original file from jjethwa/icinga2
+  echo "=> Ok, new installation. I will run some scripts"
+  echo "=> Copying fresh config-files for /etc/icinga2"
+  cp -R /etc/icinga2.dist/* /etc/icinga2/
+  # This needs to be done here, or Icinga doesn't want to start, as it can't write config files
+  chown -R nagios:root /etc/icinga2
 
-#Original file from jjethwa/icinga2
-echo "=> Ok, new installation. I will run some scripts"
-echo "=> Copying fresh config-files for /etc/icinga2"
-cp -R /etc/icinga2.dist/* /etc/icinga2/
+  # master or satellite? Ask TYPE
+  echo "Ok, I am going to setup icinga2 in ${TYPE} mode"
+  if [ ${TYPE} = "satellite" ]; then
+    /opt/setup/icinga2-satellite
+  fi
 
+  if [ ${TYPE} = "master" ]; then
+    /opt/setup/icinga2-master
+  fi
 
-
-#master or satellite? Ask TYPE
-echo "Ok, I am going to setup icinga2 in ${TYPE} mode"
-if [ ${TYPE} = "satellite" ]; then
-
-/opt/setup/icinga2-satellite
-
-fi
-
-if [ ${TYPE} = "master" ]; then
-
-/opt/setup/icinga2-master
-
-fi
-
-#pnp or influxdb? Ask PERFDATA
-
-if [ ${PERFDATA} = "influxdb" ]; then
-
-/opt/setup/influxdb
-
-fi
+  /opt/setup/influxdb
 
 
-
-chfn -f "${ICINGA2_USER_FULLNAME}" nagios
+  chfn -f "${ICINGA2_USER_FULLNAME}" nagios
 
 # IDO MySQL
 cat > /etc/icinga2/features-available/ido-mysql.conf <<-END
@@ -123,12 +103,31 @@ object IdoMysqlConnection "ido-mysql" {
   database = "icinga2idomysql"
 }
 END
-
 fi
+
+cat >> /etc/icinga2/conf.d/api-users.conf <<-END
+
+object ApiUser "director" {
+  password = "director"
+  permissions = [ "*" ]
+  //client_cn = ""
+}
+
+END
+
+cat >> /etc/icinga2/zones.d/director.conf <<-END
+
+object Zone "director-global" {
+  global = true
+}
+
+END
+
+icinga2 feature enable ido-mysql
 
 #ssmtp factory defaults
 if [ ! -f "/etc/ssmtp/ssmtp.conf" ]; then
-/opt/setup/ssmtp
+  /opt/setup/ssmtp
 fi
 
 
@@ -140,11 +139,9 @@ icinga2 daemon --validate
 
 #Check for an available internet connection
 if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
-ntpd -gq
-service ntp start
+  ntpd -gq
+  service ntp start
 fi
-
-
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n &
 trap "supervisorctl shutdown && wait" SIGTERM

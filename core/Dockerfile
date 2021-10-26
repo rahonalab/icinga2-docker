@@ -1,12 +1,14 @@
-#Rahona be Labs
+# Rahona be Labs
 # Dockerfile for an icinga2 core system
 
-#Contains code from
+# Contains code from
 # https://github.com/jjethwa/icinga2
 
-FROM debian:stretch-slim
+FROM debian:bullseye-slim
 
 MAINTAINER Luigi - Rahona Labs
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get update \
@@ -14,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get install -y --no-install-recommends \
           ca-certificates \
 	  curl \
+	  apt-utils \
           gcc  \
 	  gnupg2 \
           liblist-compare-perl \
@@ -23,7 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	  liblwp-protocol-https-perl \
 	  logrotate \
           mailutils \
-          mysql-client \
+          mariadb-client \
 	  nagios-plugins-contrib \
           nagios-snmp-plugins \
           nagios-nrpe-plugin \
@@ -31,7 +34,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
           net-tools \
           ntp       \
           procps \
-          python-pywbem \
           python \
           python-dev \
           pwgen \
@@ -46,13 +48,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-RUN echo "deb http://http.debian.net/debian/ stretch main contrib non-free" > /etc/apt/sources.list
-
 RUN export DEBIAN_FRONTEND=noninteractive \
-     && wget --quiet -O - https://packages.icinga.org/icinga.key \
-     | apt-key add - \
-     && echo "deb http://packages.icinga.org/debian icinga-stretch main" > /etc/apt/sources.list.d/icinga2.list \
-     && echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backport.list \
+     && wget --quiet -O /tmp/icinga.key https://packages.icinga.com/icinga.key && apt-key add /tmp/icinga.key \
+     && echo "deb http://packages.icinga.com/debian icinga-bullseye main" > /etc/apt/sources.list.d/icinga2.list \
      && apt-get update \
      && apt-get install -y --no-install-recommends \
           icinga2 \
@@ -62,7 +60,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
-#Modify nagios uid to be consistent across containers
+# Modify nagios uid to be consistent across containers
 RUN usermod -u 9001 nagios && groupmod -g 9001 nagios
 
 ADD content/ /
@@ -75,5 +73,6 @@ RUN sed -i 's/vars\.os.*/vars.os = "Docker"/' /etc/icinga2/conf.d/hosts.conf \
         /bin/ping \
         /bin/ping6 \
         /usr/lib/nagios/plugins/check_icmp
+
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]
