@@ -37,6 +37,7 @@ services:
 #     volumes:
 #       - ./${FIRSTNAME}-container/lib/grafana:/var/lib/grafana
   influxdb:
+    # just use "influxdb" on x86_64
     image: arm32v7/influxdb
     env_file: ./secrets.env
     domainname: ${DOMAINNAME}
