@@ -6,3 +6,4 @@ icinga2-master-*
 .env
 *.swn
 secrets.env
+.env

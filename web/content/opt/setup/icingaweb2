@@ -103,11 +103,57 @@ cat >> /etc/icingaweb2/modules/monitoring/config.ini <<-END
 protected_customvars = "*pw*,*pass*,community"
 END
 
+cat >> /etc/icinga2/conf.d/api-users.conf <<-END
+
+object ApiUser "director" {
+  password = "director"
+  permissions = [ "*" ]
+  //client_cn = ""
+}
+END
+
+cat >> /etc/icinga2/zones.d/director.conf <<-END
+
+object Zone "director-global" {
+  global = true
+}
+END
+
 # cookie in config.ini
 cat >> /etc/icingaweb2/config.ini <<-END
 
 [cookie]
 path = /
+END
+
+mkdir -p /etc/icingaweb2/modules/director
+
+cat >> /etc/icingaweb2/resources.ini <<-END
+
+[Director DB]
+type = "db"
+db = "mysql"
+host = "sql"
+dbname = "director"
+username = "director"
+password = "${DIRECTOR_USER_PASSWORD}"
+charset = "utf8"
+END
+
+cat >> /etc/icingaweb2/modules/director/config.ini <<-END
+
+[db]
+resource = "Director DB"
+END
+
+cat >> /etc/icingaweb2/modules/director/kickstart.ini <<-END
+
+[config]
+endpoint = ${DIRECTOR_EP}
+; host = 127.0.0.1
+; port = 5665
+username = ${DIRECTOR_EP_USER}
+password = ${DIRECTOR_EP_USER}
 END
 
 # enable modules
@@ -118,7 +164,10 @@ icingacli module enable cube
 icingacli module enable map
 icingacli module enable nagvis
 icingacli module enable company
+icingacli module enable director
+icingacli module enable reactbundle
+icingacli module enable ipl
+icingacli module enable incubator
 
 # commit ourselves
 touch /etc/icingaweb2/CONFIGURED
-

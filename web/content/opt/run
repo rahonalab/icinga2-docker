@@ -54,9 +54,7 @@ if [ ! -d "/var/lib/mysql/director" ]; then
 END
 fi
 
-if ! id "icingadirector" &>/dev/null; then
-  /opt/setup/director
-fi
+/opt/setup/director
 
 # If we cannot find nagvis conf, run conf script
 if [ ! -f "/usr/local/nagvis/etc/nagvis.ini.php" ]; then

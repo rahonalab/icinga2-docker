@@ -29,7 +29,15 @@ services:
     hostname: ${FIRSTNAME}-sql
     volumes:
       - ./${FIRSTNAME}-container/lib/mysql:/var/lib/mysql
+#   grafana:
+#     image: grafana/grafana
+#     env_file: ./secrets.env
+#     domainname: ${DOMAINNAME}
+#     hostname: ${FIRSTNAME}-grafana
+#     volumes:
+#       - ./${FIRSTNAME}-container/lib/grafana:/var/lib/grafana
   influxdb:
+    # just use "influxdb" on x86_64
     image: arm32v7/influxdb
     env_file: ./secrets.env
     domainname: ${DOMAINNAME}
