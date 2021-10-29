@@ -105,24 +105,6 @@ object IdoMysqlConnection "ido-mysql" {
 END
 fi
 
-cat >> /etc/icinga2/conf.d/api-users.conf <<-END
-
-object ApiUser "director" {
-  password = "director"
-  permissions = [ "*" ]
-  //client_cn = ""
-}
-
-END
-
-cat >> /etc/icinga2/zones.d/director.conf <<-END
-
-object Zone "director-global" {
-  global = true
-}
-
-END
-
 icinga2 feature enable ido-mysql
 
 #ssmtp factory defaults
